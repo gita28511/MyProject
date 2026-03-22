@@ -439,7 +439,7 @@ penyelesaian: [
   "(a × b)<sup>n</sup> = a<sup>n</sup> × b<sup>n</sup>",
   "Artinya: jika ada perkalian dipangkatkan, pangkatnya bisa dibagi ke masing-masing.",
   "✏️ Perkalian dengan basis sama:",
-  "a<sup>n</sup> × a<sup>m</sup> = a<sup>n + m</sup>",
+  "a<sup>m</sup> × a<sup>n</sup> = a<sup>m + n</sup>",
   "Artinya: kalau dikali dan basisnya sama, pangkatnya dijumlahkan.",
   "🔍 Analisis tiap opsi:",
   "📌 <b>Opsi A : 3<sup>6</sup> × 5<sup>6</sup></b> : ",
@@ -455,7 +455,7 @@ penyelesaian: [
   "🚫 Salah konsep",
   "📌 <b>Opsi C : 15<sup>3</sup> × 15<sup>2</sup></b>:",
   "• Basisnya sama (15), jadi pakai aturan:",
-  "a<sup>n</sup> × a<sup>m</sup> = a<sup>n + m</sup>",
+  "a<sup>m</sup> × a<sup>n</sup> = a<sup>m + n</sup>",
   "• Maka : 15<sup>3</sup> × 15<sup>2</sup></b> = 15<sup>3 + 2</sup> = 15<sup>5</sup> ≠ 15<sup>6</sup>",
   "🚫 Salah, karena hasilnya 15⁵, bukan 15⁶",
   "📌 <b>Opsi D : (3 × 5)<sup>3</sup> :",
@@ -490,66 +490,150 @@ penyelesaian: [
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
+kategori: "Bentuk pangkat",
+pertanyaan: "Bentuk baku dari 0,000000225 adalh...",
+opsi: ["225 &times 10<sup>7</sup>","2,25 &times; 10<sup>-7</sup> ","25 &times; 10<sup>7</sup>","2,25 &times; 10<sup>-6</sup>"],
 jawaban: 1,
 penyelesaian: [
-    ""
+  "🔑 Konsep bentuk baku (notasi ilmiah):",
+  "Bentuk baku ditulis sebagai: a &times; 10<sup>n</sup>, dengan syarat:",
+  "1 ≤ a < 10",
+  "✏️ Angka: 0,000000225 kita ubah supaya menjadi antara 1 dan 10 sesuai syarat diatas.",
+  "Geser koma ke kanan sampai jadi 2,25",
+  "Hitung berapa kali geser:",
+  "0,000000225 → 2,25 (geser 7 langkah ke kanan)",
+  "Karena geser ke kanan, maka pangkatnya negatif: 10<sup>7</sup>",
+  "🔍 Hasil:",
+  "2,25 &times; 10<sup>-7</sup>"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Bentuk Pangkat",
+pertanyaan: "Bentuk yang setara dengan 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> adalah....",
+opsi: ["3<sup>4</sup> &times 8","4<sup>8</sup>","3<sup>8 &times; 4</sup>","3<sup>6</sup>"],
+jawaban: 3,
 penyelesaian: [
-    ""
+  "📌 Identifikasi jumlah suku:",
+  "Dalam soal tersebut, bilangan 3<sup>4</sup> dijumlahkan sebanyak 9 kali",
+  "3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup>:",
+  "9 &times; 3<sup>4</sup>",
+  "📌Ubah angka 9 menjadi bilangan berpangkat basis 3:",
+  "Kita tahu bahwa 9 = 3 &times; 3 yang berarti:",
+  "9 = 3<sup>2</sup>",
+  "📌 Gunakan sifat perkalian bilangan berpangkat:",
+  "Substitusikan 9 dengan 3<sup>2</sup> ke dalam persamaan :",
+  "9 &times; 3<sup>4</sup> = 3<sup>2</sup> &times;  3<sup>4</sup>",
+  "Gunakan rumus: a<sup>n</sup> × a<sup>m</sup> = a<sup>n + m</sup>",
+  "Maka:  3<sup>2</sup> &times;  3<sup>4</sup> = 3<sup>2 + 4</sup>",
+  "3<sup>2 + 4</sup> = 3<sup>6</sup>"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
+kategori: "Bentuk Pangkat ",
+pertanyaan: "Nilai dari 256<sup>1 &frasl; 2</sup> &times; 27<sup>1 &frasl; 3</sup> &times; 2<sup>-3</sup> adalah....",
+opsi: ["1025","6","2856","384"],
 jawaban: 1,
 penyelesaian: [
-    ""
+  "🔑 Konsep yang dipakai:",
+  "📌 Pangkat pecahan:",
+  "• a <sup>1 &frasl; 2</sup> = &radic;a (akar kuadrat)",
+  "• a <sup>1 &frasl; 3</sup> = ∛a (akar pangkat tiga)",
+  "📌 Pangkat negatif:",
+  "• a<sup>-n</sup> = 1 &frasl; a<sup>n</sup>",
+  "✏️ Ubah ke bentuk akar",
+  "• 256<sup>1 &frasl; 2</sup> = &radic;256 = 16",
+  "• 27 <sup>1 &frasl; 3</sup> = ∛27 = 3",
+  "• 2<sup>-3</sup> = 1 &frasl; 2<sup>3</sup> = 1 &frasl; 8",
+  "✏️ Kalikan semua",
+  "16 &times; 3 &times; 1 &frasl; 8 = 48 &times; 1 &frasl; 8 = 6"
+},
+{
+kategori: "Bentuk pangkat",
+pertanyaan: "Bentuk 2<sup>-6</sup> &divide; 2<sup>2</sup> bila dinyatakan dalam pangkat positif adalah....",
+opsi: ["1 &frasl; 2<sup>-8</sup>","1 &frasl; 2<sup>4</sup>","1 &frasl; 2<sup>-4</sup>","1 &frasl; 2<sup>8</sup>"],
+jawaban: 3,
+penyelesaian: [
+  "🔑 Konsep yang dipakai:",
+  "📌 Pembagian dengan basis sama:",
+  "a<sup>m</sup> &divide; a<sup>n</sup> = a<sup>m-n</sup>",
+  "📌 Pangkat negatif:",
+  "a<sup>-n</sup> = 1 &frasl; a<sup>n</sup>",
+  "✏️ Gunakan aturan pembagian",
+  "2<sup>-6</sup> &divide; 2<sup>2</sup> = 2<sup>(-6-2)</sup> = 2<sup>-8</sup>",
+  "✏️ Ubah ke pangkat positif",
+  "2<sup>-8</sup> = 1 &frasl; 2<sup>8</sup>"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Bilangan berpangkat",
+pertanyaan: "Sebuah bintang berjarak tiga tahun cahaya dari bumi. Jika satu tahun cahaya = 9,46 x 10<sup>12</sup> km, jarak antara bumi dan bintang adalah...km",
+opsi: ["2,838 &times; 10<sup>13</sup>","2,46 &times; 10<sup>12</sup>","9,46 &times; 10<sup>13</sup>","28,38 &times; 10<sup>14</sup>"],
+jawaban: 0,
 penyelesaian: [
-    ""
+  "🔑 Konsep yang digunakan:",
+  "📌 Perkalian dalam bentuk baku",
+  "Jika : a × (b × 10ⁿ) = (a × b) × 10ⁿ",
+  "📌 Bentuk baku (notasi ilmiah)",
+  "Ditulis sebagai:",
+  "a × 10ⁿ, dengan syarat: 1 ≤ a < 10",
+  "✏️ Kalikan jarak",
+  "• Jarak = 3 × (9,46 × 10¹²)",
+  "• Gunakan konsep perkalian:",
+  "= (3 × 9,46) × 10¹² = 28,38 × 10¹²",
+  "✏️ Ubah ke bentuk baku",
+  "Karena 28,38 > 10, maka harus diubah",
+  "Geser koma ke kiri:",
+  "Karena geser 1 langkah, maka:",
+  "= 2,838 × 10¹³"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Bilangan berpangkat",
+pertanyaan: "Tentukan nilai x dari 9<sup>x</sup> = 6.561",
+opsi: ["7","5","4","3"],
+jawaban: 2,
 penyelesaian: [
-    ""
+  "🔑 Konsep yang digunakan (logaritma) :",
+  "Jika bentuknya : a<sup>x</sup> = b, maka:",
+  "x = log<sub>a</sub>b",
+  "Dari: 9ˣ = 6561, maka:",
+  "x = log<sub>9</sub> 6561",
+  "🔍 Cara menghitung:",
+  "✏️ Ubah ke log biasa:",
+  "x = log 6561 &frasl; log 9", 
+  "perhatikan bahwa:",
+  "• 6561 = 3⁸",
+  "• 9 = 3²",
+  "• Jadi: x = log(3<sup>8</sup>) / log(3<sup>2</sup>)",
+  "✏️Gunakan sifat log:",
+  "log(aⁿ) = n log a",
+  "Maka : x = (8 log 3) / (2 log 3)",
+  "• log 3 bisa dicoret:",
+  "x = 8 / 2 = 4"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Bilangan berpangkat",
+pertanyaan: "Ibu Rina adalah guru bidang kesiswaan, Bu Rina ingin menyampaikan informasi dengan cepat melalui WA kepada semua siswa di sekolahnya. Bu Rina mulai menyampaikan pesan kepada 5 siswa, selanjutnya 5 siswa tersebtu menyampaikan informasi pesan berantai kepada 5 siswa yang lainnya, dan seterusnya. Waktu yang diperlukan untuk mengirim pesan berantai kepada 5 siswa adalah 15 detik. Berapa jumlah siswa yang menerima informasi lewat WA dalam waktu 1 menit?",
+opsi: ["625","526","325","730"],
+jawaban: 0,
 penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
+  "🔑 Konsep yang digunakan:",
+  "Ini adalah pertumbuhan berlipat (perkalian berulang) → bentuk pangkat",
+  "Setiap tahap: dikali 5 &rArr; 5<sup>n</sup>",
+  "✏️ Hitung jumlah tahap",
+  "1 menit = 60 detik",
+  "1 tahap = 15 detik",
+  "jumlah tahap = 60 ÷ 15 = 4 tahap",
+  "✏️ Hitung jumlah siswa",
+  "Setiap tahap dikali 5:",
+  "• Tahap 1: 5¹ = 5",
+  "• Tahap 2: 5² = 25",
+  "• Tahap 3: 5³ = 125",
+  "• Tahap 4: 5⁴ = 625",
+  "Jadi, jumlah siswa yang menerima informasi ada 625 siswa"
+  
+  
 ]
 }
 ]
