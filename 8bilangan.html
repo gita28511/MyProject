@@ -456,7 +456,7 @@ penyelesaian: [
   "📌 <b>Opsi C : 15<sup>3</sup> × 15<sup>2</sup></b>:",
   "• Basisnya sama (15), jadi pakai aturan:",
   "a<sup>m</sup> × a<sup>n</sup> = a<sup>m + n</sup>",
-  "• Maka : 15<sup>3</sup> × 15<sup>2</sup></b> = 15<sup>3 + 2</sup> = 15<sup>5</sup> ≠ 15<sup>6</sup>",
+  "• Maka : 15<sup>3</sup> × 15<sup>2</sup> = 15<sup>3 + 2</sup> = 15<sup>5</sup> ≠ 15<sup>6</sup>",
   "🚫 Salah, karena hasilnya 15⁵, bukan 15⁶",
   "📌 <b>Opsi D : (3 × 5)<sup>3</sup> :",
   "• ini sama dengan (3 × 5)<sup>3</sup> = 15<sup>3</sup> ≠ 15<sup>6</sup>",
@@ -510,7 +510,7 @@ penyelesaian: [
 {
 kategori: "Bentuk Pangkat",
 pertanyaan: "Bentuk yang setara dengan 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> + 3<sup>4</sup> adalah....",
-opsi: ["3<sup>4</sup> &times; 8","4<sup>8</sup>","3<sup>8 &times; 4</sup>","3<sup>6</sup>"],
+opsi: ["3<sup>36</sup> ","4<sup>8</sup>","3<sup>8 &times; 4</sup>","3<sup>6</sup>"],
 jawaban: 3,
 penyelesaian: [
   "📌 Identifikasi jumlah suku:",
@@ -546,9 +546,11 @@ penyelesaian: [
   "• 2<sup>-3</sup> = 1 &frasl; 2<sup>3</sup> = 1 &frasl; 8",
   "✏️ Kalikan semua",
   "16 &times; 3 &times; 1 &frasl; 8 = 48 &times; 1 &frasl; 8 = 6"
+]
+
 },
 {
-kategori: "Bentuk pangkat",
+kategori: "Bentuk Pangkat",
 pertanyaan: "Bentuk 2<sup>-6</sup> &divide; 2<sup>2</sup> bila dinyatakan dalam pangkat positif adalah....",
 opsi: ["1 &frasl; 2<sup>-8</sup>","1 &frasl; 2<sup>4</sup>","1 &frasl; 2<sup>-4</sup>","1 &frasl; 2<sup>8</sup>"],
 jawaban: 3,
@@ -572,19 +574,19 @@ jawaban: 0,
 penyelesaian: [
   "🔑 Konsep yang digunakan:",
   "📌 Perkalian dalam bentuk baku",
-  "Jika : a × (b × 10ⁿ) = (a × b) × 10ⁿ",
+  "Jika : a × (b × 10<sup>n</sup>) = (a × b) × 10<sup>n</sup>",
   "📌 Bentuk baku (notasi ilmiah)",
   "Ditulis sebagai:",
-  "a × 10ⁿ, dengan syarat: 1 ≤ a < 10",
+  "a × 10<sup>n</sup>, dengan syarat: 1 ≤ a < 10",
   "✏️ Kalikan jarak",
-  "• Jarak = 3 × (9,46 × 10¹²)",
+  "• Jarak = 3 × (9,46 × 10<sup>12</sup>)",
   "• Gunakan konsep perkalian:",
-  "= (3 × 9,46) × 10¹² = 28,38 × 10¹²",
+  "= (3 × 9,46) × 10<sup>12</sup> = 28,38 × 10<sup>12</sup>",
   "✏️ Ubah ke bentuk baku",
   "Karena 28,38 > 10, maka harus diubah",
   "Geser koma ke kiri:",
   "Karena geser 1 langkah, maka:",
-  "= 2,838 × 10¹³"
+  "= 2,838 × 10<sup>13</sup>"
 ]
 },
 {
@@ -596,17 +598,17 @@ penyelesaian: [
   "🔑 Konsep yang digunakan (logaritma) :",
   "Jika bentuknya : a<sup>x</sup> = b, maka:",
   "x = log<sub>a</sub>b",
-  "Dari: 9ˣ = 6561, maka:",
+  "Dari: 9<sup>x</sup> = 6561, maka:",
   "x = log<sub>9</sub> 6561",
   "🔍 Cara menghitung:",
   "✏️ Ubah ke log biasa:",
   "x = log 6561 &frasl; log 9", 
   "perhatikan bahwa:",
-  "• 6561 = 3⁸",
-  "• 9 = 3²",
+  "• 6561 = 3<sup>8</sup>",
+  "• 9 = 3<sup>2</sup>",
   "• Jadi: x = log(3<sup>8</sup>) / log(3<sup>2</sup>)",
-  "✏️Gunakan sifat log:",
-  "log(aⁿ) = n log a",
+  "✏️ Gunakan sifat log:",
+  "log(a<sup>n</sup>) = n log a",
   "Maka : x = (8 log 3) / (2 log 3)",
   "• log 3 bisa dicoret:",
   "x = 8 / 2 = 4"
@@ -614,7 +616,7 @@ penyelesaian: [
 },
 {
 kategori: "Bilangan berpangkat",
-pertanyaan: "Ibu Rina adalah guru bidang kesiswaan, Bu Rina ingin menyampaikan informasi dengan cepat melalui WA kepada semua siswa di sekolahnya. Bu Rina mulai menyampaikan pesan kepada 5 siswa, selanjutnya 5 siswa tersebtu menyampaikan informasi pesan berantai kepada 5 siswa yang lainnya, dan seterusnya. Waktu yang diperlukan untuk mengirim pesan berantai kepada 5 siswa adalah 15 detik. Berapa jumlah siswa yang menerima informasi lewat WA dalam waktu 1 menit?",
+pertanyaan: "Ibu Rina adalah guru bidang kesiswaan, Bu Rina ingin menyampaikan informasi dengan cepat melalui WA kepada semua siswa di sekolahnya. Bu Rina mulai menyampaikan pesan kepada 5 siswa, selanjutnya 5 siswa tersebut menyampaikan informasi pesan berantai kepada 5 siswa yang lainnya, dan seterusnya. Waktu yang diperlukan untuk mengirim pesan berantai kepada 5 siswa adalah 15 detik. Berapa jumlah siswa yang menerima informasi lewat WA dalam waktu 1 menit?",
 opsi: ["625","526","325","730"],
 jawaban: 0,
 penyelesaian: [
@@ -632,8 +634,6 @@ penyelesaian: [
   "• Tahap 3: 5³ = 125",
   "• Tahap 4: 5⁴ = 625",
   "Jadi, jumlah siswa yang menerima informasi ada 625 siswa"
-  
-  
 ]
 }
 ];
