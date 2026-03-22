@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Latihan Soal - KESEBANGUNAN & KEKONGRUENAN | Kelas VII</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔢 KESEBANGUNAN & KEKONGRUENAN</h1>
+  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+{
+kategori: "Kekongruenan Bangun segitiga",
+pertanyaan: "Pernyataan berikut ini yg benar adalah....",
+opsi: ["Dua buah segitiga dikatakan kongruen jika sisi-sisi yg bersesuaian mempunyai perbandingan yg sama","Dua buah segitiga dikatakan kongruen jika sisi-sisi yang bersesuaian sama panjang.","Dua buah segitiga dikatakan kongruen jika sudut-sudut yg bersesuain sama besar","Dua buah segitiga dikatakan kongruen jika dua pasang sisi yg bersesuaian sama panjang"],
+jawaban: 1,
+penyelesaian: [
+  "📝Analisis masing masing opsi",
+  "📌 <b>Opsi A</b> : <i>Salah</i>, Karena mempunyai perbandingan sisi yang sama adalah syarat untuk segitiga yang sebangun, bukan kongruen. Pada bangun yang kongruen, perbandingannya harus tepat 1:1 (alias sama panjang).",
+  "📌 <b>Opsi B</b> : <i>Benar</i>, Karena ini adalah salah satu syarat utama (postulat Sisi-Sisi-Sisi). Jika ketiga pasang sisi yang bersesuaian sama panjang, maka kedua segitiga tersebut pasti memiliki bentuk dan ukuran yang identik (kongruen).",
+  "📌 <b>Opsi C</b> : <i>Salah</i>, Karena jika hanya sudut-sudutnya yang sama besar, segitiga tersebut dikatakan sebangun. Ukurannya bisa saja berbeda (satu besar, satu kecil) meskipun bentuknya sama.",
+  "📌 <b>Opsi D</b> : <i>Salah</i>, Karena hanya memiliki dua pasang sisi yang sama panjang belum cukup untuk menjamin kekongruenan. Diperlukan satu informasi tambahan, seperti sudut yang diapit kedua sisi tersebut (Sisi-Sudut-Sisi) atau panjang sisi ketiga."
+]
+},
+{
+kategori: "Kesebangunan Segitiga",
+pertanyaan: "Segitiga-segitiga berikut ini yg tidak sebangun dengan segitiga yg ukuran sisinya 5 cm, 12 cm dan 13 cm adalah....",
+opsi: ["15 m, 36 m, 39 m","2,5 dm, 6 dm, 6,5 dm","10 cm, 24 cm, 26 cm","1,5 m, 6 m, 6,5 m"],
+jawaban: 3,
+penyelesaian: [
+  "📌📝 Untuk menentukan segitiga yang tidak sebangun dengan segitiga bersisi 5 cm, 12 cm, dan 13 cm, kita pakai konsep kesebangunan.",
+  "📐 segitiga akan sebangun jika:",
+  "• Perbandingan sisi-sisinya sama : ",
+  "Segitiga 5 : 12 : 13 adalah segitiga khusus (tripel Pythagoras), jadi semua segitiga yang sebangun harus berbentuk:",
+  "k × 5, 𝑘 × 12, 𝑘 × 13",
+  "📌 Cek masing-masing opsi:",
+  "<b> 15 m, 36 m, 39 m</b> → 15 : 36 : 39 ",
+  "→ 5 : 12 : 13   ✔️ Sebangun",
+  "<b> 2,5 dm, 6 dm, 6,5 dm</b> → 2,5 : 6 : 6,5 ",
+  "→  5 : 12 : 13 ✔️ Sebangun",
+  "<b> 10 cm, 24 cm, 26 cm</b> → 10 : 24 : 26",
+  "→ 5 : 12 : 13 ✔️ Sebangun",
+  "<b> 1,5 m, 6 m, 6,5 m</b> → 1,5 : 6 : 6,5",
+  "→ 3 : 12 : 13 ✖️ tidak sama dengan 5 : 12 : 13 (tidak sebangun)."
+
+]
+},
+{
+kategori: "kesebangunan & kekongruenan",
+pertanyaan: "Perhatikan gambar berikut.<br><img src='./panjang-bc.png' alt='soal segitiga' width='385'> <br> Jika panjang BD = 8 cm dan AD = 6 cm, maka panjang BC adalah...",
+opsi: ["10 cm","12,5 cm","16 cm","16,5 cm"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Pada gambar:",
+  "• ∠A adalah siku-siku",
+  "• AD adalah tinggi ke sisi BC",
+  "• D membagi BC menjadi BD dan DC",
+  "📌 Diketahui:",
+  "• BD = 8 cm",
+  "• AD = 6 cm",
+  "📝 Gunakan konsep segitiga siku-siku dengan tinggi ke hipotenusa",
+  "📐 Gunakan rumus penting:",
+  "AD <sup>2</sup> = BD × DC",
+  "Substitusi:",
+  "6<sup>2</sup> = 8 × DC",
+  "36 = 8 × DC",
+  "DC = 36 &frasl; 8 ",
+  "DC = 4,5 cm",
+  "🔍 Cari panjang BC:",
+  "BC = BD + DC = 8 + 4,5 = 12,5 cm",
+  "Jadi, panjang BC adalah 12,5 cm"
+
+]
+},
+{
+kategori: "kesebangunan segitiga",
+pertanyaan: "Perhatikan gambar segitiga berikut. <br><img src='./segitiga-arsir.png' alt='soal segitiga' width='385'> <br> Keliling segitiga yg diarsir pada gambar diatas adalah....",
+opsi: ["24 cm","18 cm","20 cm","16 cm"],
+jawaban: 0,
+penyelesaian: [
+  "📌 Menentukan Dimensi Segitiga Besar",
+  "Dari gambar, kita dapat melihat segitiga siku-siku besar (misalkan segitiga besar △<sub>1</sub> dengan:",
+  "tinggi (<i>t<sub>1</sub></i>) = 12 cm",
+  "alas (<i>a<sub>1</sub></i>) = 5 cm",
+  "sisi miring <i>m<sub>1</sub></i>  : Menggunakan rumus Pythagoras <i>a<sup>2</sup></i> + <i>b<sup>2</sup></i> = <i>c<sup>2</sup></i>",
+  "dengan <i>a</i> adalah tinggi; dan <i>b</i> adalah alas ",
+  "(<i>m<sub>1</sub></i>) = &radic;(12<sup>2</sup> + 5<sup>2</sup>)",
+  "&radic;(144 +25) = &radic;(169) = 13 cm",
+  "📌 Identifikasi Segitiga yang Diarsir",
+  "Misal segitiga yg diarsir adalah △<sub>2</sub>",
+  "Segitiga yang diarsir berada di dalam segitiga besar dan memiliki sisi-sisi yang sejajar, sehingga kedua segitiga tersebut sebangun.",
+  "Alas segitiga diarsir (<i>a<sub>2</sub></i>) = 4 cm",
+  "🔍 Cari Sisi Lain Segitiga yang Diarsir",
+  "Karena sebangun, perbandingan sisi-sisinya akan sama:",
+  "(<i>a<sub>2</sub></i>) &frasl; (<i>a<sub>1</sub></i>) = (<i>t<sub>2</sub></i>) &frasl; (<i>t<sub>1</sub></i>) = (<i>m<sub>2</sub></i>) &frasl; (<i>m<sub>1</sub></i>)",
+  "🔍 Cari tinggi △<sub>2</sub> (<i>t<sub>2</sub></i>) :",
+  "4 &frasl; 5 = (<i>t<sub>2</sub></i>) &frasl; 12 &rArr; (<i>t<sub>2</sub></i>) = (4 × 12) &frasl; 5 = 48 &frasl; 5 = 9,6 cm",
+  "🔍 Cari Sisi Miring △<sub>2</sub> <i>(m<sub>2</sub>)</i>:",
+  "4 &frasl; 5 = (<i>m<sub>2</sub></i>) &frasl; 13 &rArr; (<i>m<sub>2</sub></i>) = (4 × 13) &frasl; 5 = 52 &frasl; 5 = 10,4 cm",
+  "📐 Menghitung Keliling",
+  "Keliling segitiga yang diarsir adalah jumlah dari ketiga sisinya:",
+  "Keliling = (<i>a<sub>2</sub></i>) + (<i>t<sub>2</sub></i>) + (<i>m<sub>2</sub></i>)",
+  "Keliling = 4 + 9,6 + 10,4",
+  "keliling = 4 + 20 = 24",
+  "Jadi, keliling segitiga yg diarsir adalah 24 cm"
+]
+},
+{
+kategori: "Perbandingan kesebangunan",
+pertanyaan: "Sebuah pohon mempunyai bayangan sepanjang 15 meter di atas tanah mendatar. Sedangkan sebuah tiang bendera yang tingginya 5,2 meter memiliki bayangan 6,5 meter. Tinggi pohon sebenarnya adalah ....",
+opsi: ["10 m","18 m","12 m","11,5 m"],
+jawaban: 2,
+penyelesaian: [
+  "📌 Diketahui:",
+  "Panjang bayangan pohon (<i>b<sub>1</sub></i>) = 15 m",
+  "Tinggi tiang bendera (<i>t<sub>2</sub></i>) = 5,2 m",
+  "Panjang bayangan tiang bendera (<i>b<sub>2</sub></i>) = 6,5 m",
+  "📝 Untuk mencari tinggi pohon sebenarnya, Gunakan rumus perbandingan kesebangunan berikut:",
+  "tinggi pohon &frasl; bayangan pohon = tinggi tiang &frasl; bayangan tiang",
+  "(<i>t<sub>1</sub></i>) &frasl; (<i>b<sub>1</sub></i>) = (<i>t<sub>2</sub></i>) &frasl; (<i>b<sub>2</sub></i>)",
+  "📌 Masukkan nilai yang diketahui ke dalam rumus:",
+  "(<i>t<sub>1</sub></i>) &frasl; 15 = 5,2 &frasl; 6,5",
+  "&rArr; (<i>t<sub>1</sub></i>) = (5,2 × 15) &frasl; 6,5",
+  "&rArr (<i>t<sub>1</sub></i>) = 78 &frasl; 6,5 = 12",
+  "Jadi tinggi pohon sebenarnya adalah 12 m"
+]
+},
+{
+kategori: "Kesebangunan & kekongruenan",
+pertanyaan: "Perhatikan trapesium ABCD pada gambar berikut dengan AB = 12cm, CD = 28 cm, dan AK = 2/3 AD. Panjang KL adalah....<br><img src='./panjang-kl.png' alt='soal segitiga' width='385'> <br>",
+opsi: ["22,67 cm","18,67 cm","15,56 cm","20,6 cm"],
+jawaban: 0,
+penyelesaian: [
+  "📝 Berdasarkan gambar trapesium ABCD tersebut, kita diminta untuk mencari panjang ruas garis KL yang sejajar dengan sisi atas (AB) dan sisi bawah (CD).",
+  "📌 Diketahui:",
+  "• Panjang sisi atas (AB) = 12 cm",
+  "• Panjang sisi bawah (CD) = 28 cm",
+  "• Perbandingan ruas garis pada kaki trapesium: AK = 2/3 AD",
+  "📝 Dari informasi AK = 2/3 AD,  kita bisa menentukan perbandingan segmen garis pada kaki AD :",
+  "• Jika total panjang  AD dianggap sebagai 3 bagian, maka AK = 2 bagian",
+  "• Sisanya, yaitu KD = AD - AK = 3 - 2 = 1 bagian",
+  "• Jadi, perbandingan AK : KD = 2 : 1",
+  "📌 Rumus Panjang Garis Tengah Trapesium:",
+  "Untuk mencari panjang garis yang sejajar di dalam trapesium, kita menggunakan rumus sebagai berikut: ",
+  "<br><img src='./rumus-baru.png' alt='soal segitiga' width='385'> <br>",
+  "Substitusikan nilai perbandingan dan panjang sisi ke dalam rumus :",
+  "KL = [(2 × 28) +(1 × 12)] &frasl; (2 + 1)",
+  "KL = (56 + 12) &frasl; 3 ",
+  "KL = 68 &frasl; 3 ≈ 22,67",
+  "Jadi, panjang KL adalah 22,67 cm"
+
+
+]
+},
+{
+kategori: "Kesebangunan",
+pertanyaan: "Sebuah foto berukuran 52 cm x 26 cm diletakkan pada selembar karton. Pada bagian atas, kiri, dan kanan foto mesih terdapat sisa karton selebar 4 cm. Jika foto dan karton sebangun, maka lebar karton di sebelah bawah foto adalah ....",
+opsi: ["10 cm","12 cm","13 cm","11 cm"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Diketahui:",
+  "🖼️ UKuran foto :",
+  "• Tinggi foto (<i>t<sub>f</sub></i>) = 52 cm",
+  "• Lebar foto (<i>l<sub>f</sub></i>) = 26 cm",
+  "Sisa karton :",
+  "• Kiri (<i>s<sub>k</sub></i>) = 4 cm",
+  "• Kanan (<i>s<sub>r</sub></i>) = 4 cm",
+  "• Atas (<i>s<sub>a</sub></i>) = 4 cm",
+  "• Bawah (<i>s<sub>b</sub></i>) = x (<i>yang ingin dicari</i>)",
+  "📐 Menentukan ukuran karton",
+  "Ukuran total karton dapat kita tentukan berdasarkan ukuran foto ditambah sisa-sisa karton di sekelilingnya:",
+  "• Lebar karton (<i>L<sub>k</sub></i>) :",
+  "<i>L<sub>k</sub></i> = lebar foto + sisa kiri + sisa kanan",
+  "<i>L<sub>k</sub></i> = 26 + 4 + 4 = 34 cm",
+  "• Tinggi karton (<i>t<sub>k</sub></i>) :",
+  "<i>t<sub>k</sub></i> = tinggi foto + sisa atas + sisa bawah",
+  "<i>t<sub>k</sub></i> = 52 + 4 + x = 26 + x cm",
+  "📐 Menggunakan Konsep Kesebangunan",
+  "Karena foto dan karton sebangun, maka perbandingan antara tinggi dan lebar foto akan sama dengan perbandingan antara tinggi dan lebar karton:",
+  "<i>t<sub>f</sub></i> &frasl; <i>l<sub>f</sub></i> = <i>t<sub>k</sub></i> &frasl; <i>L<sub>k</sub></i>",
+  "52 &frasl; 26 = (56 + x) &frasl; 34",
+  "📐 Menghitung Nilai :",
+  "2 = (56 + x) &frasl; 34",
+  "2 × 34 = 56 + x",
+  "68 = 56 + x",
+  "x = 68 - 56",
+  "x = 12",
+  "Jadi, nilai x adalah 12 cm atau dengan kata lain, Lebar karton di sebelah bawah foto adalah 12 cm. "
+
+]
+},
+{
+kategori: "Kekongruenan segitiga",
+pertanyaan: "Perhatikan gambar berikut. <br><img src='./kongruen.png' alt='soal segitiga' width='385'> <br> Segitiga PQR kongruen dengan segitiga ABC. Pernyataan berikut yg benar adalah...",
+opsi: ["PQ = 12 cm","∠C = ∠R","QR = AC","∠R = 30°"],
+jawaban: 1,
+penyelesaian: [
+  "📝 kita dapat menentukan pernyataan mana yang benar dengan membandingkan sudut-sudut dan sisi-sisi yang bersesuaian pada dua segitiga kongruen tersebut.",
+  "📌 Mencari Sudut-Sudut yang Belum Diketahui",
+  "Dua segitiga dikatakan kongruen jika semua sudut yang bersesuaian sama besar dan semua sisi yang bersesuaian sama panjang. Mari kita hitung sudut yang belum diketahui pada masing-masing segitiga (ingat: total sudut dalam segitiga adalah (180°)",
+  "📐 Segitiga PQR:",
+  "• ∠P = 95°",
+  "• ∠Q = 55°",
+  "• ∠R = 180° - (95° + 55°) = 180° - 150° = 30°",
+  "📐 Segitiga ABC:",
+  "• ∠A = 55°",
+  "• ∠B = 30°",
+  "• ∠C = 180° - (55° + 30°) = 180° - 85° = 95°",
+  "📌 Memasangkan Sudut yang Sama (Bersesuaian)",
+  "• ∠P = 95° = ∠C ",
+  "• ∠Q = 55° = ∠A",
+  "• ∠R = 55° = ∠B",
+  "📌 Memasangkan sisi yang Sama (Bersesuaian)",
+  "Sisi yang bersesuaian terletak di depan sudut yang besarnya sama:",
+  "• Sisi di depan sudut  95° : QR = AB",
+  "• Sisi di depan sudut 55° : PR = BC = 12 cm",
+  "• Sisi di depan sudut 30° : PQ = AC",
+  "📝 Analisis Pilihan Jawaban:",
+  "<b> OPSI A</b> : QR = AC: Salah (QR seharusnya sama dengan AB).",
+  "<b> OPSI B</b> : ∠C = ∠R: Salah (∠C = 95°), sedangkan ∠R = 30°",
+  "<b> OPSI C</b> : PQ = 12 cm: Salah (yang panjangnya 12 cm adalah BC, yang bersesuaian dengan PR).",
+  "<b> OPSI D</b> : ∠R = 30°: Benar (sesuai hasil perhitungan di atas)",
+
+]
+},
+{
+kategori: "Kekongruenan segitiga",
+pertanyaan: "Segitiga ABC dan segitiga PQR kongruen. Jika AB = QR dan AC = PQ maka pasangan sudut yg sama besar adalah...",
+opsi: ["∠A = ∠P, ∠B = ∠Q, ∠C = ∠R ","∠A = ∠P, ∠B = ∠R, ∠C = ∠Q ","∠A = ∠Q, ∠B = ∠P, ∠C = ∠R ","∠A = ∠Q, ∠B = ∠R, ∠C = ∠P "],
+jawaban: 3,
+penyelesaian: [
+  "📝 Untuk menentukan pasangan sudut yang sama besar pada dua segitiga yang kongruen, kita harus mencocokkan sisi-sisi yang memiliki panjang yang sama. Sudut yang sama besar akan terletak di depan sisi yang sama panjang.",
+  "✏️  Identifikasi Sisi yang Bersesuaian",
+  "📌 Diketahui :",
+  "• AB = QR",
+  "• AC = PQ",
+  "• Karena segitiga ABC dan PQR kongruen, maka sisi ketiga juga harus sama panjang: BC = PR",
+  "✏️ Menentukan Sudut yang Bersesuaian",
+  "Sudut dalam sebuah segitiga selalu menghadap ke sisi di depannya. Mari kita pasangkan sudut berdasarkan sisi yang sama panjang:",
+  "📌 Sisi AB & QR:",
+  "• Sudut di depan sisi AB pada △ABC adalah ∠C ",
+  "• Sudut di depan sisi QR pada △PQR adalah ∠P ",
+  "• Jadi, ∠C = ∠P",
+  "📌 Sisi AC & PQ:",
+  "• Sudut di depan sisi AC pada △ABC adalah ∠B ",
+  "• Sudut di depan sisi PQ pada △PQR adalah ∠R ",
+  "• Jadi, ∠B = ∠R",
+  "📌 Sisi BC & PR:",
+  "• Sudut di depan sisi BC pada △ABC adalah ∠A ",
+  "• Sudut di depan sisi PR pada △PQR adalah ∠Q ",
+  "• Jadi, ∠A = ∠Q",
+  "📝 Kesimpulan:",
+  "Pasangan sudut yg sama besar adalah :",
+  "• ∠A = ∠Q",
+  "• ∠B = ∠R",
+  "• ∠C = ∠P",
+  "Ini sesuai dengan pilihan jawaban/opsi D"
+
+]
+},
+{
+kategori: "Kekongruenan segitiga",
+pertanyaan: "Diketahui △ABC kongruen dengan △PQR. Jika AB = 20 cm, PQ = 25 cm dan ∠A = ∠R = 95°, maka panjang AC adalah...",
+opsi: ["10 cm","15 cm","30 cm","45 cm"],
+jawaban: 1,
+penyelesaian: [
+  "📝 Untuk menentukan panjang AC, kita perlu memahami konsep kekongruenan pada segitiga.",
+  "📝 Dua segitiga dikatakan kongruen jika memiliki bentuk dan ukuran yang sama persis, yang berarti sisi-sisi yang bersesuaian sama panjang dan sudut-sudut yang bersesuaian sama besar.",
+  "📌 Diketahui:",
+  "• △ABC kongruen dengan △PQR (artinya kedua segitiga identik)",
+  "• ∠A = ∠R = 90° (keduanya adalah segitiga siku-siku)",
+  "• AB = 20 cm",
+  "• PQ = 25 cm",
+  "✏️ Identifikasi Sisi-sisi yang Bersesuaian:",
+  "Karena △ABC kongruen dengan △PQR, maka panjang sisi-sisinya harus saling berpasangan sama panjang. Namun, kita harus teliti melihat sudutnya",
+  "• Pada △ABC sudut siku-siku ada di titik A. Maka, sisi di depan sudut A adalah sisi miring, yaitu BC",
+  "• Pada △PQR, sudut siku-siku ada di titik R. Maka, sisi di depan sudut R adalah sisi miring PQ",
+  "✏️ Menentukan Panjang sisi miring :",
+  "Karena kedua segitiga kongruen, maka sisi miring △ABC sama dengan sisi miring △PQR :",
+  "BC = PQ = 25 cm",
+  "✏️ Mencari Panjang AC dengan Teorema Pythagoras:",
+  "Pada △ABC, kita sudah tahu panjang AB = 20 cm & BC = 25 cm.  Karena ini segitiga siku-siku di A, berlaku:",
+  "AC<sup>2</sup> = BC<sup>2</sup> - AB<sup>2</sup>",
+  "AC<sup>2</sup> = 25<sup>2</sup> - 20<sup>2</sup>",
+  "AC<sup>2</sup>  = 625 - 400",
+  "AC<sup>2</sup> = 225",
+  "AC = &radic;(225)",
+  "AC = 15 cm",
+  "Jadi, panjang AC adalah 15 cm"
+]
+}
+]
+ ;
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

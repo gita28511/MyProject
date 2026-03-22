@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Latihan Soal - ALJABAR | Kelas VII</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔢 ALJABAR</h1>
+  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+{
+kategori: "Aljabar",
+pertanyaan: "Jika x + 5 = 12, berapakah nilai x?",
+opsi: ["5","6","7","8"],
+jawaban: 2,
+penyelesaian: [
+    "x + 5 = 12.",
+    "Kurangi kedua ruas dengan 5",
+    "x + 5 - 5 = 12 -5",
+     "x = 12 - 5 = 7.",
+     "Jadi, nilai x adalah 7."
+    ]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Tentukan himpunan penyelesaian dari 2x + 3 = 15",
+opsi: ["-6","6","-7","11"],
+jawaban: 1,
+penyelesaian:[ 
+    "2x + 3 = 15.",
+    "Kurangi kedua ruas dengan 3:",
+    "2x + 3 - 3 = 15 - 3.",
+    "2x = 12",
+    "Bagi kedua ruas dengan 2",
+    "2x &frasl; 2 = 12 &frasl; 2",
+    "x = 6.",
+    "Jadi, x = 6 adalah penyelesaian untuk persamaan 2x + 3 = 15"
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Jika x + y = 12 dan xy = 35, maka nilai dari x<sup>2</sup> + y<sup>2</sup> adalah?",
+opsi: ["72","-73","-7","74"],
+jawaban: 3,
+penyelesaian: [
+    "Diketahui bahwa:",
+    "x + y = 12",
+    "xy = 35",
+    "Manfaatkan FPB dari 35:",
+     "<table style='border-collapse:collapse; margin-top:8px;'>\
+      <tr>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Pasangan</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Jumlah</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Hasil kali</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>1 dan 35</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>36</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>35</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>5 dan 7</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>12</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>35</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'> -1 dan -35 </td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>-36</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>35</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>-5 dan -7</b></td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>-12</b></td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>35</th>\
+      </tr>\
+      </tr>\
+    </table>",
+    "Perhatikan untuk baris ke-3, faktor 35 yaitu 5 dan 7",
+    "Perkalian 5 × 7 = 35",
+    "Penjumlahan 5 + 7 = 12",
+    "Maka kita peroleh:",
+    "x = 5",
+    "y = 7",
+    "Selesaikan untuk x<sup>2</sup> + y<sup>2</sup>",
+    "x<sup>2</sup> + y<sup>2</sup> = 5<sup>2</sup> + 7<sup>2</sup>",
+    "5<sup>2</sup> + 7<sup>2</sup> = 25 + 49 = 74"
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Bentuk sederhana dari (3x - 4)<sup>2</sup> - (x + 2)<sup>2</sup> adalah",
+opsi: ["8x<sup>2</sup> - 28x + 12","8x<sup>2</sup> - 20x + 12","9x<sup>2</sup> - 28x - 12","8x<sup>2</sup> - 28x - 12"],
+jawaban: 0,
+penyelesaian: [
+    "Jika kita punya bentuk (a - b)<sup>2</sup> = a<sup>2</sup> - 2ab + b<sup>2</sup>",
+    "selesaikan masing masing suku:",
+    "(3x - 4)<sup>2</sup> = (3x)<sup>2</sup> -( 2 × 3x × 4) + 4<sup>2</sup>",
+    "(3x - 4)<sup>2</sup> = 9x<sup>2</sup> - 24x + 16",
+    "(x + 2)<sup>2</sup> = x<sup>2</sup> + (2 × x × 2) + 2<sup>2</sup>",
+    "(x + 2)<sup>2</sup> = x<sup>2</sup> + 4x + 4",
+    "Gabungkan kedua suku:",
+    "(3x - 4)<sup>2</sup> - (x + 2)<sup>2</sup> = (9x<sup>2</sup> - 24x + 16) - (x<sup>2</sup> + 4x + 4)",
+    "Urutkan dari pangkat tertinggi ke terkecil dan selesaikan: ",
+    "(9x<sup>2</sup> - 24x + 16) - (x<sup>2</sup> + 4x + 4) = 9x<sup>2</sup> - 24x + 16 - x<sup>2</sup> - 4x - 4",
+    "Selesaikan:",
+    "9x<sup>2</sup> - x<sup>2</sup> - 24x - 4x + 16 - 4 = 8x<sup>2</sup> - 28x + 12"
+
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Jika p + q = 9 dan pq = 20, maka nilai p<sup>3</sup> + q<sup>3</sup> adalah",
+opsi: ["189","199","-189","289"],
+jawaban: 0,
+penyelesaian: [
+    "Diketahui bahwa :",
+    "p + q = 9",
+    "pq = 20",
+    "Manfaatkan Faktor dari 20,",
+    "<table style='border-collapse:collapse; margin-top:8px;'>\
+      <tr>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Pasangan</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Jumlah</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Hasil kali</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>1 dan 20</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>21</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>20</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>2 dan 10</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>12</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>20</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'> 4 dan 5 </td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>9</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>20</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>-1 dan -20</b></td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>-21</b></td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>20</th>\
+      </tr>\
+      </tr>\
+      <td style='border:1px solid #aaa;padding:4px 8px;'> -2 dan -10 </td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>-12</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>20</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'> -4 dan -5 </td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>-9</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>20</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+    </table>",
+    "Perhatikan di baris ke-3 yaitu faktor dari 20: 4 dan 5:",
+    "Perkalian 4 & 5 ⇒ 4 × 5 = 20",
+    "Penjumlahan 4 & 5 ⇒ 4 + 5 = 9",
+    "Maka: p<sup>3</sup> + q<sup>3</sup> = 4<sup>3</sup> + 5<sup>3</sup> ",
+    "4<sup>3</sup> + 5<sup>3</sup> = 64 + 125 = 189"
+
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Sederhanakan bentuk berikut x&frasl;2 - (x+4)&frasl;3",
+opsi: ["(x-4)&frasl;6","(x-8)&frasl;6","(x+4)&frasl;6","(x+8)&frasl;6"],
+jawaban: 1,
+penyelesaian: [
+    "Samakan penyebut menjadi 6.",
+    "x&frasl;2 - (x + 4)&frasl;3 = 3x&frasl;6 - 2×(x + 4)&frasl;6",
+    "3x&frasl;6 - 2 × (x + 4)&frasl;6 = [3x - 2 × (x+4)]&frasl;6 ",
+    " [3x - 2 × (x+4)]&frasl;6 = (3x - 2x - 8)&frasl;6 = (x-8)&frasl;6"
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Pada bentuk aljabar a<sup>2</sup> + bc - 2bc + b<sup>2</sup> - 10, koefisien dari b<sup>2</sup>2 adalah?",
+opsi: ["0","-1","2","1"],
+jawaban: 3,
+penyelesaian: ["Koefisien adalah bilangan yang dikalikan dengan variabel.",
+"Variabel yang ada di bentuk aljabar tersebut adalah a, b dan c ",
+"Sedangkan koefisiennya untuk tiap suku adalah:",
+"Koefisien a<sup>2</sup> = 1 ",
+"Koefisien b<sup>2</sup> = 1 ",
+"Koefisien bc = 1 ",
+"Koefisien -2bc = -2 ",
+"-10  adalah konstanta ",
+"Pada suku b<sup>2</sup>2 tidak ada angka di depan sehingga koefisiennya 1."]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Bentuk sederhana dari 5(x - 5y) - 3(x - 2y) adalah",
+opsi: ["-2x - 19y","2x - 19y","2x + 19y","19x - 5y"],
+jawaban: 1,
+penyelesaian: [
+    "Selesaikan masing-masing suku:",
+    "Suku pertama ⇒ 5(x - 5y) = 5x - 25y",
+    "Suku kedua ⇒ 3(x - 2y) = 3x - 6y",
+    "Gabungkan ⇒ 5(x - 5y)- 3(x - 2y) = (5x - 25y) - (3x - 6y) ",
+    "Keluarkan dari dalam kurung",
+    "(5x - 25y) - (3x - 6y) = 5x - 25y - 3x + 6y",
+    "Selesaikan ⇒ 5x - 25y - 3x + 6y = 5x - 3x - 25y + 6y = 2x - 19y"
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Hasil dari (2x - 5)<sup>3</sup> adalah",
+opsi: ["8x<sup>3</sup> + 10x<sup>2</sup> + 60x + 25","8x<sup>3</sup> + 60x<sup>2</sup> + 150x + 125","8x<sup>3</sup>- 10x<sup>2</sup> + 60x - 25","8x<sup>3</sup> - 60x<sup>3</sup> + 150x - 125"],
+jawaban: 3,
+penyelesaian: [
+    "Gunakan rumus (a-b)<sup>3</sup> = a<sup>3</sup> - 3a<sup>2</sup>b + 3ab<sup>2</sup> - b<sup>3</sup>",
+    "Untuk bentuk yg kita punya, ambil a=2x dan b=5 sehingga diperoleh:",
+    "(2x-5)<sup>3</sup> = 2x<sup>3</sup> - 3 × (2x)<sup>2</sup> × (5) + 3 × 2x × 5<sup>2</sup> - 5<sup>3</sup>.",
+    "= 8x<sup>3</sup> - 60x<sup>2</sup> - 150x - 125"
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Bentuk sederhana dari (6a - 3b) &frasl; (2a<sup>2</sup> - ab) adalah",
+opsi: ["3 &frasl; a","2 &frasl; a","4 &frasl; 3a ","2 &frasl; 3a"],
+jawaban: 0,
+penyelesaian: [
+    "Untuk bentuk (6a - 3b) &frasl; (2a<sup>2</sup> - ab),",
+    "Perhatikan bentuk pembilang (6a - 3b) dapat difaktorkan menjadi:",
+    "(6a - 3b) = 3(2a - b)",
+    "Selanjutnya untuk penyebut (2a<sup>2</sup> - ab) dapat difaktorkan menjadi:",
+    "(2a<sup>2</sup> - ab) = a(2a - b)",
+    "Gabungkan ke bentuk semula:",
+    "(6a - 3b) &frasl; (2a<sup>2</sup> - ab) = 3(2a - b) &frasl; a(2a - b)",
+    " (2a - b) saling membagi habis, maka:",
+    "3(2a - b) &frasl; a(2a - b) = 3 &frasl; b",
+    
+]
+},
+
+{
+kategori: "Aljabar",
+pertanyaan: "Pada bentuk aljabar 3a<sup>2</sup> - 7a - 9, suku konstanta adalah",
+opsi: ["3a^2","3 dan -7","a^2 dan a","-9"],
+jawaban: 3,
+penyelesaian: [
+    "Konstanta adalah suku yang tidak memiliki variabel.",
+    "Pada bentuk tersebut yang tidak memiliki variabel adalah -9.",
+]
+},
+{
+kategori: "Aljabar",
+pertanyaan: "Pemfaktoran dari bentuk 4x<sup>2</sup> - 1 adalah",
+opsi: ["(4x + 1)(4x - 1)","2(2x + 1)(2x - 1)","4(x + 1)(x - 1)","(2x + 1)(2x - 1)"],
+jawaban: 3,
+penyelesaian: [
+    " Perhatikan bentuk 4x<sup>2</sup> - 1 ",
+    "Ubah menjadi bentuk kuadrat:",
+    "4x<sup>2</sup> = (2x)<sup>2</sup>",
+    "1 = 1<sup>2</sup>",
+    "Karena berbentuk selisih kuadrat, gunakan rumus a<sup<2</sup> - b<sup>2</sup> = (a - b)(a + b)",
+    "Misalkan a = 2x dan b = 1",
+    "⇒ (a - b)(a + b) = (2x - 1)(2x + 1) = (2x + 1)(2x - 1)"
+]
+},
+{
+kategori: "Aljabar",
+pertanyaan: "Nilai dari x + 1 &frasl; x",
+opsi: ["x + 1 &frasl; x","(x<sup>2</sup> + x) &frasl; x ","(x<sup>2</sup> + 1) &frasl; x"," 1"],
+jawaban: 2,
+penyelesaian: [
+    "x + 1 &frasl; x = x &frasl; 1 + 1 &frasl; x",
+    "Samakan penyebut menjadi x:",
+    "(x × x) &frasl; 1 × x + 1 &frasl; x",
+    "x<sup>2</sup> &frasl; x + 1 &frasl; x",
+    "Jumlahkan pembilang karena penyebut sama:",
+    "(x<sup>2</sup> + 1) &frasl; x "
+]
+},
+{
+kategori: "Aljabar",
+pertanyaan: "Diketahui bentuk aljabar 7y<sup>2</sup> + 9 - x + 4y. Koefisien dari x, y dan y<sup>2</sup> secara berturut-turut adalah...",
+opsi: ["7; 9; -1","-1; 7; 4","0; 4; 7"," -1; 4; 7"],
+jawaban: 3,
+penyelesaian: [
+    "Bentuk aljabar 7y<sup>2</sup> + 9 - x + 4y",
+    "Urutkan berdasarkan variabel:",
+    "7y<sup>2</sup> + 4y - x + 9",
+    "Koefisien tiap suku:",
+    "<table style='border-collapse:collapse; margin-top:8px;'>\
+      <tr>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Variabel</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>koefisien</th>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>7y<sup>2</sup></td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>7</td>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>4y</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>4</td>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>-x</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>-1</td>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>9</b></td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>konstanta</b></td>\
+      </tr>\
+    </table>",
+    "Maka dapat diurutkan susunan koefisien dari x, y dan y<sup>2</sup> secara berturut-turut adalah -1, 4, 7"
+
+
+]
+},
+{
+kategori: "Aljabar",
+pertanyaan: "hasil bagi x<sup>2</sup> - 5x + 6 oleh x - 2 adalah...",
+opsi: ["x - 3","x + 3 ","x - (5 &frasl; 2) - 3"," x + (5 &frasl; 2) + 3"],
+jawaban: 0,
+penyelesaian: [
+    "Pembagian x<sup>2</sup> - 5x + 6 oleh  x - 2 : x<sup>2</sup> - 5x + 6 &frasl; x - 2 ",
+    "x<sup>2</sup> - 5x + 6 &frasl; x - 2",
+    "Bagian pembilang x<sup>2</sup> - 5x + 6 dapat difaktorkan dengan cara mencari dua bilangan yg: ",
+    "• Dijumlah hasilnya -5",
+    "• Dikalikan hasilnya 6",
+    "Manfaatkan faktor dari 6",
+    "<table style='border-collapse:collapse; margin-top:8px;'>\
+      <tr>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Pasangan</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Jumlah</th>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>Hasil kali</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>1 dan 6</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>7</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>6</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>2 dan 3</td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>5</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>6</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'> -1 dan -6 </td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'>-7</td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>6</th>\
+      </tr>\
+      </tr>\
+      <tr>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>-2 dan -3</b></td>\
+        <td style='border:1px solid #aaa;padding:4px 8px;'><b>-5</b></td>\
+        <th style='border:1px solid #aaa;padding:4px 8px;'>6</th>\
+      </tr>\
+      </tr>\
+    </table>",
+    "Jadi, Bilangan-bilangan tersebut adalah -2 dan -3 ",
+    "⇒ x<sup>2</sup> - 5x + 6 = (x - 2)(x - 3)",
+    "Masukkan ke bentuk awal:",
+    "⇒ x<sup>2</sup> - 5x + 6 &frasl; x - 2 = (x - 2)(x - 3) & frasl; x - 2 ",
+    "⇒ (x-2) pada pembilang & penyebut saling membagi, sehingga:",
+    "⇒ x<sup>2</sup> - 5x + 6 &frasl; x - 2 = x-3"
+
+]
+}
+]
+ ;
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

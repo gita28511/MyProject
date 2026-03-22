@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Latihan Soal - ALJABAR | Kelas VII</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔢 ALJABAR</h1>
+  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+{
+kategori: "Segitiga sama kaki",
+pertanyaan: "Dibawah ini merupakan sifat segitiga sama kaki, <i>kecuali</i>....",
+opsi: ["Memiliki dua sisi yang sama panjang","Memiliki dua sudut yang sama besar","sudut-sudut alasnya tidak sama besar","Garis tegak lurus dari sudut puncak membagi alas dan sudut puncak menjadi dua sama besar."],
+jawaban: 2,
+penyelesaian: [
+    "📝 Segitiga sama kaki adalah segitiga yang memiliki dua sisi sama panjang.",
+    " Akibatnya, dua sudut yang berhadapan dengan sisi-sisi tersebut (sudut alas) juga sama besar",
+    "Selain itu, garis yang ditarik dari sudut puncak ke alas akan:",
+    "🔹tegak lurus terhadap alas 📐",
+    "🔹membagi alas menjadi dua sama panjang; dan",
+    "🔹membagi sudut puncak menjadi dua sama besar",
+    "Jadi, Pernyataan “sudut-sudut alasnya tidak sama besar” adalah salah, karena bertentangan dengan sifat segitiga sama kaki."
+    ]
+},
+
+{
+kategori: "Keliling segitiga",
+pertanyaan: "Perhatikan gambar segitiga berikut. <br><img src='./soal-3-segitiga.png' alt='soal segitiga' width='385'> <br> keliling segitiga PQR adalah...",
+opsi: ["29 cm","41 cm","70 cm","210 cm"],
+jawaban: 2,
+penyelesaian:[
+    "📌Diketahui:",
+    "Segitiga <b>PQR</b> siku-siku di <b>P</b>",
+    "<b>PR</b> = 29 cm (sisi miring/hipotenusa)",
+    "<b>PQ</b> = 21 cm",
+    "🔹Mencari sisi yg belum diketahui",
+    "Sisi yg belum diketahui adalah <b>PQ</b> (alas segitiga siku siku).",
+    "Gunakan teorema phytagoras berikut untuk mencari alas:",
+    "<br><img src='./rumus-alas.png' alt='soal segitiga' width='385'> <br>",
+    "<b>PQ</b> = <b>&radic; (QR<sup>2</sup> - PR<sup>2</sup>)</b>",
+    "<b> &radic; (29 <sup>2</sup> - 21<sup>2</sup>)</b>",
+    "⇒ <b> &radic; (841 - 441) = &radic; 400 = 20",
+    "Jadi, luas <b>PQ</b> (sisi alas) = 20 cm",
+    "🔹Hitung keliling segitiga",
+    "Untuk menghitung rumus segitiga gunakan rumus:",
+    "K = sisi miring + sisi alas + sisi tegak",
+    "⇒ K = sisi <b>PR</b> + sisi <b>PQ</b> + sisi <b>QR</b>",
+    "Substitusi nilai-nilai yg sudah diperoleh sebelumnya ke rumus keliling, maka:",
+    "⇒ K = 21 cm + 20 cm + 29 cm = 70 cm ",
+    "Sehingga keliling segitiga PQR adalah 70 cm"
+]
+},
+
+{
+kategori: "Segitiga",
+pertanyaan: "Keliling sebuah segitiga sama kaki adalah 36 cm. Jika panjang alasnya adalah 10 cm, maka panjang sisi yang lain adalah....",
+opsi: ["26 cm","13 cm","18 cm","24 cm"],
+jawaban: 3,
+penyelesaian: [
+  "Misalkan segitiga sama kaki yg kita miliki adalah seperti berikut.",
+  "<br><img src='./segitiga-sama-kaki.png' alt='soal segitiga' width='385'> <br>",
+  "<b>📌Karakteristik segitiga sama kaki</b>:",
+  "• Terdapat dua buah sisi yg sama panjang, AC = BC",
+  "• Terdapat dua buah sudut yg sama besar ∠A = ∠B",
+  "📌 Dari soal, diketahui:",
+  "• Keliling segitiga sama kaki adalah : K = 36 cm",
+  "• Panjang alas = BC = 10 cm",
+  "📐 Untuk menghitung panjang sisi yg lain yaitu AB & AC, maka manfaatkan rumus keliling segitiga:",
+  "K = 2s + a",
+  "Dengan s = sisi ",
+  "a = alas",
+  "Manfaatkan luas keliling dan luas alas yg sudah diketahui:",
+  "⇒ K = 2s + a ",
+  "⇒ 36 = 2s + 10",
+  "⇒ 26 = 2s (<i>Kedua ruas dikurangi 10</i>)",
+  "⇒ s = 26 &frasl; 2 ⇒ s = 13",
+  "Karena karakteristik dari segitiga sama kaki adalah mempunyai 2 buah sisi yg sama panjang, maka:",
+  "Panjang sisi yg lain, yaitu AB = AC = 13 cm"
+
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Pada segitiga ABC, diketahui ∠A = 35° dan ∠B = 45°. Segitiga ABC termasuk segitiga....",
+opsi: ["tumpul","siku-siku","sama kaki","sama sisi"],
+jawaban: 0,
+penyelesaian: [
+  "📌 Diketahui:",
+  "∠A = 35°",
+  "∠B = 45°",
+  "Maka, sudut C dapat dihitung dengan:",
+  "∠C = 180° - (35° + 45°) = 180° - 80° = 100°",
+  "Jadi sudut-sudut segitiga tersebut adalah 35°, 45°, dan 100°.",
+  "📝 <b> Analisis Jenis-jenis segitiga berdasar besar sudut</b>:",
+  "📌Jika semua sudut < 90° → segitiga lancip",
+  "📌Jika ada sudut = 90° → segitiga siku-siku",
+  "📌Jika ada sudut > 90° → segitiga tumpul",
+  "📌Semua sudut seharusnya 60° → segitiga sama sisi",
+  "Jadi, segitiga ABC termasuk segitiga tumpul."
+  
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Besar sudut-sudut sebuah segitiga berturut-turut adalah 2x°,(x + 4)° dan (4x + 36)°, nilai <i>x</i> adalah...",
+opsi: ["15","12","20","24"],
+jawaban: 2,
+penyelesaian: [
+  "📝 Diketahui sudut-sudut segitiga:",
+  "• 2x°",
+  "• (x + 4)°",
+  "• (4x + 36)°",
+  "Jumlah sudut dalam segitiga adalah 180° 📐",
+  "📌 Menyusun persamaan:",
+  "2x + (x+4) + (4x+36) = 180 ⇒ 2x + x + 4 + 4x + 36 = 180",
+  "📌 Sederhanakan :",
+  "7x + 40 = 180",
+  "7x = 140 (<i>kedua ruas dikurangi 40</i>)",
+  "x = 140 &frasl; 7 ⇒ x = 20",
+  "Jadi nilai x adalah 20"
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Luas sebuah segitiga adalah 50 cm<sup>2</sup> dan panjang alasnya 20 cm. Tinggi segitiga adalah...",
+opsi: ["8 cm","6 cm","7 cm","5 cm"],
+jawaban: 3,
+penyelesaian: [
+  "📌 Diketahui:",
+  "Luas segitiga = 50 cm<sup>2</sup>",
+  "Alas = 20 cm",
+  "📌 Ditanya : Tinggi segitiga (<i>t</i>)?",
+  "Untuk menentukan tinggi segitiga, Manfaatkan rumus Luas segitiga:",
+  "📐 Rumus :",
+  "L = 1 &frasl; 2 × <i>alas</i> × <i>tinggi</i>",
+  "L = 1 &frasl; 2 × <i>a</i> × <i>t</i>",
+  "📌 Gunakan nilai-nilai yg sudah diketahui sebelumnya:",
+  "50 = 1 &frasl; 2 × 20 × <i>t</i>",
+  "50 = 10<i>t</i>",
+  "<i>t</i> = 5 cm",
+  "Jadi, tinggi segitiga adalah 5 cm "
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Tinggi sebuah segitiga 6 cm dan panjang alasnya 15 cm. Luas segitiga tersebut adalah ....",
+opsi: ["21 cm<sup>2</sup>","45 cm<sup>2</sup>","21 cm<sup>2</sup>","36 cm <sup>2</sup>"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Diketahui:",
+  "tinggi (<i>t</i>) = 6 cm",
+  "alas (<i>a</i>) = 15 cm",
+  "Untuk menentukan luas segitiga, gunakan rumus seperti berikut.",
+  "<br><img src='./luas-segitiga.png' alt='soal segitiga' width='385'> <br>",
+  "📌 Substitusi nilai-nilai yg diketahui ke dalam rumus:",
+  "⇒ L = 1 &frasl; 2 × 15 × 6 ⇒ L = 1 &frasl; 2 × 90",
+  "⇒ L = 45",
+  "Jadi, luas segitiga adalah 45 cm<sup>2</sup>"
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Pasangan ruas garis berikut yang dapat membentuk segitiga adalah segitiga dengan panjang sisi...",
+opsi: ["7, 4, 12","10, 6, 20","7, 11, 19","21, 11, 12"],
+jawaban: 3,
+penyelesaian: [
+  "📝 Sebuah segitiga dapat dibangun oleh tiga buah ruas garis dengan syarat jumlah panjang dua garis harus lebih dari garis yang lain",
+  "📌 Selidiki masing masing opsi:",
+  "Opsi A : 7, 4, 12 tidak memenuhi karena 7 + 4 < 12",
+  "Opsi B : 10, 6, 10 tidak memenuhi karena 10 + 6 < 20 ",
+  "Opsi C : 7, 11, 19 tidak memenuhi karena 7 + 11 < 19",
+  "Opsi D : 21, 11, 12 memenuhi, karena: ",
+  "• 21 + 11 > 12",
+  "• 21 + 12 > 11",
+  "• 11 + 12 > 21"
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan:" Besar sudut BAC pada gambar adalah? <br><img src='./sudut-bac.png' alt='soal segitiga' width='385'> <br>",
+opsi: ["55°","43°","28°","30°"],
+jawaban: 2,
+penyelesaian: [
+  "📌 Diketahui:",
+  "∠ABC = 8x + 1",
+  "∠BCA = 4x + 7",
+  "∠BAC = 2x + 4",
+  "Untuk menentukan Besar sudut BAC, maka manfaatkan jumlah sudut segitiga.",
+  "Untuk setiap segitiga, jumlah sudut dalam segitiga adalah 180°, sehingga berlaku:",
+  "180 = ∠ABC + ∠BCA + ∠BAC",
+  "180 = (8x + 1) + (4x + 7) + (2x + 4)",
+  "180 = 8x + 1 + 4x + 7 + 2x + 4",
+  "180 = 14x + 12",
+  "168 = 14x (<i>kedua ruas dikurangi 12</i>)",
+  "x = 168 &frasl; 14 (<i>kedua ruas dibagi 14</i>)",
+  "x = 12",
+  "Besar ∠BAC = 2x + 4 = 2(12)+ 4 = 28",
+  "Jadi ∠BAC = 28° "
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Sudut-sudut lancip dari suatu segitiga siku-siku adalah...",
+opsi: ["Berpelurus"," Berpenyiku","Berpelurus","Suatu sudut lurus"],
+jawaban: 1,
+penyelesaian: [
+  "📝 Segitiga siku-siku memiliki dua sudut lancip (kurang dari 90°) dan satu sudut siku-siku (90°)",
+  "✏️ Berikut poin-poin mengenai sudut lancip pada segitiga siku-siku:",
+  "📌 Jumlah Sudut: Karena total sudut dalam segitiga adalah 180° dan satu sudut sudah 90°, maka jumlah kedua sudut lancip adalah 180° - 90° = 90° ",
+  "📌 Definisi: Sudut lancip adalah sudut yang besarnya lebih besar dari dan kurang dari 90°",
+  "📌 Karakteristik: Kedua sudut lancip ini saling berpenyiku yang berarti jika salah satu sudut lancip diketahui (x), sudut lainnya adalah 90° - x.",
+  "📌 Contoh : Pada segitiga siku-siku sama kaki, dua sudut lancipnya masing-masing berukuran 45° ⇒45° + 45° + 90° = 180°"
+  
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan:"<br><img src='./panjang-alas.png' alt='soal segitiga' width='385'> <br> Jika keliling bangun diatas adalah 86 cm, maka panjang alasnya adalah....",
+opsi: ["28,5 cm","24 cm","30 cm","21 cm"],
+jawaban: 2,
+penyelesaian: [
+  "✏️ Identifikasi Sisi Segitiga : Berdasarkan gambar, bangun tersebut adalah segitiga sama kaki. Dua sisi yang sama panjang memiliki ukuran masing-masing 28 cm",
+  "Untuk mencari panjang alas, manfaatkan rumus keliling segitiga",
+  " Misalkan panjang alasnya adalah a",
+  "✏️  Hitung Panjang Alas",
+  "Keliling = sisi + sisi + alas ",
+  "86 = 28 + 28 + a <i>(substitusi nilai yg diketahui)</i>",
+  "86 = 56 + a",
+  "a = 30 <i>(kedua ruas dikurangi 56)</i>",
+  "Jadi, panjang alas segitiga sama kaki tersebut adalah 30 cm"
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Diketahui segitiga KLM merupakan segitiga sama kaki. Sisi KL dan sisi KM sama panjang yaitu 26 cm. Jika keliling segitiga KLM 83 cm, maka panjang sisi LM adalah .... cm",
+opsi: ["18 cm","21 cm","27 cm","31 cm"],
+jawaban: 3,
+penyelesaian: [
+  "📌Diketahui:",
+  "Jenis segitiga : Segitiga sama kaki",
+  "Panjang sisi yg sama : sisi KL = KM = 26 cm",
+  "Keliling segitiga = 83 cm",
+  "📌Ditanya : Panjang sisi LM",
+  "✏️ Untuk mencari panjang sisi LM, manfaatkan rumus keliling segitiga : ",
+  "Keliling = KL + KM + LM",
+  "✏️ Masukkan nilai yg diketahui ke dalam rumus keliling :",
+  "83 = 26 + 26 + LM",
+  "83 = 52 + LM",
+  "LM = 31 (<i>Kedua ruas dikurangi 52</i>)",
+  "Jadi, panjang sisi LM adalah 31 cm"
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "perhatikan gambar segitiga berikut.<br><img src='./segitiga-siku.png' alt='soal segitiga' width='385'> <br> Luas segitiga PQR adalah....",
+opsi: ["31,68 cm<sup>2</sup>","32,43 cm<sup>2</sup>","33,10 cm<sup>2</sup>","34,8 cm<sup>2</sup>"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Diketahui: ",
+  "sisi miring : PR = 15 cm",
+  "sisi tegak : RS = 7 cm",
+  "QS = 4 cm",
+  "Untuk menentukan luas segitiga PQR, maka:",
+  "✏️ Langkah 1: Cari PS dengan Pythagoras:",
+  "Segitiga PRS siku-siku:",
+  "<b>PS<sup>2</sup></b> + <b>RS<sup>2</sup></b> = <b>PR<sup>2</sup></b>",
+  "<b>PS<sup>2</sup></b> + 7<sup>2</sup> = 15<sup>2</sup>",
+  "<b>PS<sup>2</sup></b> + 49 = 225",
+  "<b>PS<sup>2</sup></b> = 176 (<i>kedua ruas dikurangi 49</i>)",
+  "<b>PS</b> = &radic; 176 = 4 &radic; 11",
+  "Jadi PS = 4 &radic; 11",
+  "✏️ Langkah 2: Luas segitiga besar PRS",
+  "L<sub>PRS</sub> = 1 &frasl; 2 × PS × RS",
+  "⇒ L<sub>PRS</sub> = 1 &frasl; 2 × 4 &radic; 11 × 7 = 14 &radic; 11",
+  "✏️ Langkah 3: Luas segitiga kecil QRS",
+  "L<sub>QRS</sub> = 1 &frasl; 2 × 4 × 7 = 14",
+  "✏️ Langkah 4: Luas segitiga PQR",
+  "L<sub>PQR</sub> = L<sub>PRS</sub> - L<sub>QRS</sub> = 14 &radic; 11 - 14 = 14 × (&radic; (11) -1) ",
+  "&radic; 11 ≈ 3,31 ⇒ 14(3,31 -1) = 14 × 2,31 ≈ 32,43 cm<sup>2</sup>",
+  "Jadi luas segitiga PQR adalah 32,43 cm<sup>2</sup>"
+]
+},
+
+{
+kategori: "segitiga",
+pertanyaan: "Nilai a, b dan c adalah sisi-sisi sebuah segitiga. Jika a adalah sisi terpanjang, maka pernyataan yang benar adalah?",
+opsi : ["a > b + c","a < b + c","a ≥ b + c","a² + b² = c²"],
+jawaban: 1,
+penyelesaian: [
+    "Dalam segitiga, jumlah dua sisi selalu lebih besar dari sisi ketiga sehingga berlaku a < b + c."
+]
+},
+{
+kategori: "Segitiga",
+pertanyaan: "Perhatikan gambar.<br><img src='./soal-bangun-datar-2.png' alt='soal perbandingan' width='385'> <br> Garis CE adalah...",
+opsi: ["Garis Berat","Garis Bagi","Garis Tinggi","Garis Sumbu"],
+jawaban: 0,
+penyelesaian: [
+    "Garis berat adalah garis yang menghubungkan titik sudut dengan titik tengah sisi di depannya.",
+    "Sehingga garis CE pada gambar menunjukkan garis berat."
+]
+}
+]
+ ;
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

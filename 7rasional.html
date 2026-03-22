@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Latihan Soal - BILANGAN RASIONAL | Kelas VII</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔢 BILANGAN RASIONAL</h1>
+  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+  {
+    kategori : "Urutan Bilangan Rasional",
+    pertanyaan: "Diketahui bilangan rasional yaitu: -1 &frasl; 2, 0, -1 &frasl; 3, -1 &frasl; 5. Urutan bilangan dari yg terkecil ke yg terbesar adalah...",
+    opsi : ["-1 &frasl; 2, -1 &frasl; 3, 0, -1 &frasl; 5", "-1 &frasl; 2, 0, -1 &frasl; 3, -1 &frasl; 5", "-1 &frasl; 2, -1 &frasl; 3, -1&frasl; 5, 0", "0, -1 &frasl; 5, -1 &frasl; 3, -1 &frasl; 2"],
+    jawaban: 2,
+    penyelesaian :[
+      "Analisis masing-masing bentuk pecahan",
+      "● -1 &frasl; 2 = -0.5",
+      "● -1 &frasl; 3 &asymp; -0.3 ",
+      "● -1 &frasl; 5 = -0.2",
+      "Urutkan dari yg terkecil maka:",
+      "-0.5; -0.3; -0.2; 0 = -1 &frasl; 2, -1 &frasl; 3, -1&frasl; 5, 0"
+    ]
+  },
+  {
+    kategori : "Urutan Bilangan Rasional",
+    pertanyaan: "Bilangan rasional berikut yang kurang dari 5 &frasl; 6 adalah....",
+    opsi : ["9/12", "6/6", "11/12", "3/2"],
+    jawaban: 0,
+    penyelesaian :[
+      "Perhatikan bentuk 5 &frasl; 6,",
+      "5 &frasl; 6 &asymp; 0.83",
+      "Analisis masing masing opsi:",
+      "9/12 = 0.75 ⇒ 0.75 < 0.83",
+      "6/6 = 1 ⇒ 1 > 0.83 ",
+      "11/12 &asymp; 0.91 ⇒ 0.91 > 0.83",
+      "3/2 = 1.5 ⇒ 1.5 > 0.83",
+      "Jadi, yang memenuhi kondisi bilangan rasioanl yg kurang dari 5 &frasl; 6 adalah 9/12"
+    ]
+  },
+  {
+    kategori : "Operasi Pembagian bilangan Rasional",
+    pertanyaan: "Hasil pembagian 12 &frasl; 15 &divide; 2 &frasl; 5 adalah?",
+    opsi : ["5/6", "1/2", "2", "3/4"],
+    jawaban: 2,
+    penyelesaian :[
+      "Pembagian 12 &frasl; 15 : 2 &frasl; 5 dapat diselesaikan dengan memanfaatkan aturan:",
+      "a/b &divide; c/d = a/b × d/c",
+      "⇒ 12/15 &divide; 2/5 = 12/15 &divide; 5/2",
+      "⇒ 12 × 5 &frasl; 15 × 2 = 60 &frasl; 30 = 2"
+    ]
+  },
+  {
+    kategori : "Soal cerita",
+    pertanyaan: "Ibu memiliki gula di dalam kantong kresek sebanyak 2&frac12;kg. Ternyata kantung kreseknya berlubang sehingga sebanyak 3 &frasl; 4kg gula tumpah. Berapakah sisa gula Ibu di kantung kresek?  ",
+    opsi : ["1 &frasl; 2kg", "7 &frasl; 4kg", "1&frac12;kg", "1 &frasl; 4kg"],
+    jawaban: 1,
+    penyelesaian :[
+      "Diketahui:",
+      "● Jumlah gula awal: 2&frac12;kg",
+      "● Gula yg tumpah : 3 &frasl; 4kg ",
+      "⇒ Sisa gula = Gula awal - gula yg tumpah",
+      "⇒ Sisa Gula = 2&frac12; - 3 &frasl; 4",
+      "Ubah pecahan campuran menjadi pecahan biasa:",
+      "2&frac12; = ((2 × 2) + 1 ) &frasl; 2 = 5 &frasl; 2kg",
+      "Gabungkan ke bentuk semula:",
+      "⇒ Sisa Gula = 5 &frasl; 2 - 3 &frasl; 4",
+      "samakan penyebut:",
+      "10 &frasl; 4 - 3 &frasl; 4 = (10 - 3) &frasl; 4 = 7/4kg"
+    ]
+  },
+  {
+    kategori : "Soal Cerita ",
+    pertanyaan: "Rudi memiliki 6 botol yang masing masing berisi 1.25 Liter sirup. Berapa liter sirup yg dimiliki oleh Rudi?",
+    opsi : ["6.25 liter", "7.5 liter", "7.25 liter", "8.5 liter"],
+    jawaban: 1,
+    penyelesaian :[
+      "Diketahui jumlah botol = 6 botol",
+      "Isi 1 botol = 1.25 liter",
+      "Total sirup ⇒ 6 × 1.25 = 7.5",
+      "Banyak sirup yg dimiliki Rudi adalah 7.5 Liter"
+    ]
+  },
+  {
+    kategori : "Menyederhanakan Pecahan",
+    pertanyaan: "Bentuk sederhana dari 0.75 adalah....",
+    opsi : ["3 &frasl; 4", "2 &frasl; 3", "3 &frasl; 5", "5 &frasl; 4"],
+    jawaban: 0,
+    penyelesaian :[
+      "Bentuk desimal 0.75 memiliki 2 angka di belakang koma",
+      "Jika ada 2 angka di belakang koma, maka bentuk pecahannya memiliki penyebut 100:",
+      "0.75 = 75 &frasl; 100",
+      " Sederhanakan pecahan dengan membagi pembilang & penyebut dengan angka yg sama, yaitu 25:",
+      "⇒ 75 &frasl; 100 = (75 &divide; 25) &frasl; (100 &divide; 25) ",
+      "⇒ (75 &divide; 25) &frasl; (100 &divide; 25) = 3 &frasl; 4"
+    ]
+  },
+  {
+    kategori : "Persentase",
+    pertanyaan: "Jika 30% dari a adalah 60, maka nilai a adalah",
+    opsi : ["200", "180", "220", "240"],
+    jawaban: 0,
+    penyelesaian :[
+      "30% dari a adalah 60",
+      "⇒ 30 &frasl; 100 × a = 60",
+      "Kalikan kedua ruas dengan 100:",
+      "⇒ 30 × a = 60 × 100",
+      "Bagi kedua ruas dengan 30:",
+      "⇒ a = 6000 &divide; 30 = 200",
+      "Jadi, nilai a adalah 200"
+
+    ]
+  },
+  {
+    kategori : "Persentase",
+    pertanyaan: "Asep membeli buku seharga Rp 25.000,00. Jika ia mendapat diskon sebesar 10%, maka uang yg harus dikeluarkan Asep adalah sejumlah?",
+    opsi : ["Rp 22.000,00", "Rp 22.500,00", "Rp 27.500,00", "Rp 23.000,00"],
+    jawaban: 1,
+    penyelesaian :[
+      "Harga buku sebelum diskon = Rp 25.000,00",
+      "Diskon = 10% = 10/100",
+      "Maka potongan harga = 25.000 × 10% ",
+      "⇒ 25.000 × 10 &frasl; 100 = 250.000 &divide; 100 = 2.500",
+      "Potongan harga yg didapat Asep adalah Rp 2.500,00 dari harga asli buku",
+      "Jumlah yg harus dibayar = Hatga awal - Potongan harga",
+      "⇒ 25.000 - 2.500 = Rp 22.500,00",
+      "Jadi uang yg harus Asep keluarkan adalah Rp 22.500,00"
+    ]
+  },
+  {
+    kategori : "Persentase",
+    pertanyaan: "Satu kelas terdiri dari 40 siswa. Jika 25% siswa adalah perempuan, maka banyaknya siswa laki-laki adalah?",
+    opsi : ["10 siswa ", "30 siswa", "20 siswa", "15 siswa"],
+    jawaban: 1,
+    penyelesaian :[
+      "Jumlah siswa seluruhnya = 40 siswa",
+      "Jumlah siswa perempuan: 25% dari 40 siswa",
+      "Jumlah siswa perempuan :  25 &frasl; 100 × 40 = 1000 &divide; 100 = 10 siswa. ",
+      "Jumlah siswa laki-laki = Jumlah seluruh siswa - Jumlah siswa perempuan: ",
+      "⇒ Jumlah seluruh siswa - Jumlah siswa perempuan = 40 - 10 = 30 siswa",
+      "Jadi, total siswa laki-laki adalah 30 siswa"
+    ]
+  },
+  {
+    kategori : "Operasi perkalian bilangan rasional",
+    pertanyaan: " Hasil kali dari 0.5 × 2 &frasl; 7 adalah...",
+    opsi : ["1 &frasl; 7", "0.35", "3 &frasl; 4", "0.17"],
+    jawaban:0 ,
+    penyelesaian :[
+      "0.5 × 2 &frasl; 7 = 5 &frasl; 10 × 2 &frasl; 7",
+      "5 &frasl; 10 × 2 &frasl; 7 = (5 × 2) &divide; (10 × 7) = 10 &frasl; 70 = 1 &frasl; 7 ",
+    ]
+  },
+  {
+    kategori : "Operasi Pengurangan bilangan rasional",
+    pertanyaan: "Hasil dari 9.5 - 4.33 adalah .....",
+    opsi : ["5.07", "5.71", "5.17", "4.83"],
+    jawaban: 2,
+    penyelesaian :[
+      "Menggunakan pengurangan bersusun, maka :",
+      "9.50",
+      "   ",
+      "4.33",
+      "______-",
+      "5.17",
+      "Jadi, hasilnya adalah 5.17"
+    ]
+  },
+  {
+    kategori : "Mengubah bentuk desimal ke bentuk pecahan",
+    pertanyaan: "Bilangan desimal -2.375 senilai dengan....",
+    opsi : ["-23 &frasl; 8", "-21 &frasl; 8", " -25 &frasl; 8", "-19 &frasl; 8"],
+    jawaban: 3,
+    penyelesaian :[
+      "Perhatikan bentuk desimal -2.375, mempunyai 3 angka dibelakang koma.",
+      "Maka, -2.375 dapat diubah ke bentuk pecahan dengan penyebut 1000",
+      "⇒ -2375 &frasl 1000.",
+      "Pembilang dan penyebut dibagi dengan bilangan yg sama.",
+      "Misal dengan bilangan 25 ⇒ (-2375 &divide; 25) &frasl; (1000 &divide; 25) = -95 &frasl; 40 (masih bisa disederhanakan)",
+      "-95 &frasl; 40 dibagi bilangan yg sama:",
+      "⇒ (-95 &divide; 5) &frasl; (40 &divide; 5) = -19 &frasl; 8"
+    ]
+  },
+  {
+    kategori : "Pecahan senilai",
+    pertanyaan: "Pasangan bilangan rasional berikut yg senilai adalah....",
+    opsi : ["13 &frasl 25 & 0.48", "68% & 17 &frasl; 25", "0.72 & 89 &frasl; 125", "725% & 27 &frasl; 40"],
+    jawaban: 1,
+    penyelesaian :[
+      "Analisis masing-masing opsi jawaban:",
+      "Opsi A: 13 &frasl 25 & 0.48 ",
+      "⇒ 0.48 = 48 &frasl; 100 (karena 2 angka di belakang koma).",
+      "Sederhanakan bentuk 48 &frasl; 100 ⇒ (48 &divide; 4) &frasl; (100 &divide; 4) = 12 &frasl; 25",
+      "⇒ 13 &frasl; 25 &ne; 12 &frasl; 25 (<b>tidak senilai</b>)",
+      "Opsi B: 68% & 17 &frasl; 25",
+      "68% = 68 &frasl; 100 = 17 &frasl; 25",
+      "Maka 68% = 17 &frasl; 25 (<b>senilai</b>)",
+      "Opsi C : 0.72 & 89 &frasl; 125",
+      "0.72 = 72 &frasl; 100 = 18 &frasl; 25",
+      "89 &frasl; 125 tidak dapat disederhanakan lagi:",
+      "⇒ 0.72 &ne; 89 &frasl; 125 (<b>tidak senilai</b>)",
+      "Opsi D : 725% & 27 &frasl; 40",
+      "725% = 725 &frasl; 100 = (725 &divide 25) &frasl; (100 &divide; 25) = 29 &frasl; 4",
+      "27 &frasl; 40 tidak dapat disederhanakan lagi",
+      "⇒ 725% &ne; 27 &frasl; 40 (<b>tidak senilai</b>)"
+    ]
+  },
+  {
+    kategori : "Persentase",
+    pertanyaan: "Suatu kelas terdiri dari 32 siswa. Mereka bekerja sama membersihkan lingkungan sekolah. Sebanyak 6 siswa membersihkan ruang kelas, 8 siswa membersihkan halaman sekolah dan sisanya membersihkan jalan di sekitar sekolah. Berapa persen siswa yg membersihkan jalan di sekitar sekolah?",
+    opsi : ["50%", "45%", "56.25%", "62.7%"],
+    jawaban: 2,
+    penyelesaian :[
+      "Jumlah seluruh siswa dalam kelas = 32 siswa",
+      "siswa yg bersihkan halaman = 8 siswa",
+      "siswa yg bersihkan kelas = 6 siswa",
+      "total siswa yg bersihkan kelas dan halaman = 6 + 8 = 14 siswa",
+      "siswa yg bersihkan jalan ⇒ 32 - 14 = 18 siswa",
+      "Hitung persentase ⇒ 18 &frasl; 32 × 100% = 0.5625 × 100% = 56.25%"
+    ]
+  },
+  {
+    kategori : "Perbandingan",
+    pertanyaan: "Usia adik 1 &frasl; 4 dari usia ayah saat ini, sedangkan usia kakek adalah 7 kali dari usia adik. Jika saat ini usia ayah adalah 40 tahun, berapakah usia kakek?",
+    opsi : ["70 tahun", "72 tahun", "68 tahun", "80 tahun"],
+    jawaban: 0,
+    penyelesaian :[
+      "Diketahui usia ayah = 40 tahun",
+      "Usia adik adalah 1 &frasl; usia ayah ⇒ 1 &frasl; 4 × 40 = 10",
+      "⇒ Usia adik = 10 tahun",
+      "Karena Usia kakek 7 kali usia adik, maka:",
+      "Usia kakek = 7 × Usia adik = 7 × 10 = 70 tahun.",
+      "Jadi, usia kakek adalah 70 tahun"
+    ]
+  }
+]
+ ;
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

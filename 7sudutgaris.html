@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latihan Soal - GARIS & SUDUT| Kelas 7</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📐 GARIS & SUDUT</h1>
+  <p>Latihan Soal Matematika &bull; Kelas 7 &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+  {
+    kategori: "Sudut & garis",
+    pertanyaan: "Jika jarum panjang dan jarum pendek sebuah jam membentuk sudut 120°, waktu menunjukkan pukul ",
+    opsi: ["pukul 4.00 atau pukul 7.00","pukul 6.00 atau pukul 12.00","pukul 4.00 atau pukul 8.00","pukul 3.00 atau pukul 9.00"],
+    jawaban: 2,
+    penyelesaian: [
+      "📝 Lingkaran jam = 360°",
+      "Ada 12 angka → tiap jarak = 30°",
+      "📌 Jarum dimulai dari pukul 12.00",
+      "Jika jarum pendek membentuk sudut 120°, maka:",
+      "120° &divide; 30° = 4",
+      "Jadi jarum pendek ada di angka 4→ pukul 4.00",
+      "Selain itu, bisa juga :",
+      "12 − 4 = 8 → pukul 8.00",
+      "Jadi jika jarum pendek membentu sudut 120° maka jam menunjukkan pukul 4.00 atau pukul 8.00"
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "<br><img src='./segitiga-siku.png' alt='soal segitiga' width='385'> <br> Perhatikan gambar di atas! Besar sudut CBD adalah.... ",
+    opsi: ["25°","35°","45°","55°"],
+    jawaban: 0,
+    penyelesaian: [
+      "📝 Analisis Gambar",
+      "📌 Sudut Siku-Siku: Perhatikan garis AB dan BD. Keduanya membentuk sudut siku-siku (∠ABD). Dalam geometri, sudut siku-siku memiliki besar 90°.",
+      "📌 Sudut Komplementer: Sudut ∠ABD terbagi  menjadi dua bagian oleh garis BC, yaitu ∠ABC dan ∠CBD.",
+      "📌 Diketahui: Besar ∠ABC = 65°",
+      "✏️ Karena ∠ABC dan ∠CBD saling berpenyiku (membentuk sudut 90°), maka berlaku rumus:",
+      "∠ABC + ∠CBD = 90°",
+      "✏️ Substitusikan nilai yang diketahui ke dalam rumus:",
+      "65° + ∠CBD = 90° ⇒ ∠CBD = 90° - 65° ⇒ ∠CBD = 25°",
+      "Jadi, ∠CBD = 25°"
+  
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "Jika Besar suatu sudut 3 ½ kali penyikunya. Besar sudut tersebut adalah ....",
+    opsi: ["55°","65°","90°","70°"],
+    jawaban: 3,
+    penyelesaian: [
+      "📝 Diketahui:",
+      "Besar suatu sudut 3 ½ kali penyikunya",
+      "📌 Misalkan:",
+      "Sudut = x",
+      "Penyiku = 90° − x",
+      "⇒ x = 3½ (90° − x)",
+      "📌 Hitung besar sudut: Sehingga besar sudut :",
+      "x = 3½ (90° − x) ⇒ x = (3½ × 90) - (3½ × x) ",
+      "x = (3,5 × 90) - 3½x",
+      "x = 315 - 3½x",
+      "⇒ x + 3½x = 315",
+      "⇒ 9x &frasl; 2 = 315",
+      "9x = 315 × 2 ⇒ 9x = 630",
+      "x = 630 &frasl; 9 ⇒ x = 70",
+      "Jadi, besar sudut tersebut adalah 70°"
+
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "<br><img src='/luar-sepihak.png' alt='./soal segitiga' width='385'> <br> Perhatikan segitiga diatas! x dan y adalah sudut...", 
+    opsi: ["Sehadap","Luar sepihak","Dalam berseberangan","Luar berseberangan"],
+    jawaban: 1,
+    penyelesaian: [
+      "📝 Analisis masing-masing opsi:",
+      "📌<b>A. Sehadap</b>: Jika dua buah garis sejajar dipotong satu garis, maka sudut-sudut sehadap yang terbentuk sama besar. ∠A1 = ∠B1, ∠A2 = ∠B2,∠A3 = ∠B3, dan ∠A4 = ∠B4 ",
+      "Pada gambar di soal, x di atas, y di bawah → tidak sehadap",
+      "Untuk lebih jelas terkait sehadap, perhatikan gambar berikut. <br><img src='./sudut-sehadap.png' alt='soal segitiga' width='385'> <br>",
+      "📌<b>Luar sepihak</b> : Jika dua buah garis sejajar dipotong oleh suatu garis, maka sudut-sudut dalam atau luar sepihak jumlahnya 180° (berpelurus) (seperti pada gambar di soal)",
+      "Pada gambar yg diberikan di soal:",
+      "x di atas garis m",
+      "y di bawah garis n (ini berarti x & y keduanya di luar)",
+      "x di kanan garis g",
+      "y juga di kanan garis g (berarti sepihak (sisi yang sama))",
+      "📌<b>Dalam berseberangan</b> : Jika dua buah garis sejajar dipotong oleh suatu garis ketiga, maka sudut-sudut dalam berpasangan yang terbentuk sama besar. ∠A4 = ∠B2, ∠A3 = ∠B1",
+      "Pada gambar di soal, x dan y di luar → bukan sudut dalam",
+      "Untuk lebih jelas perhatikan gambar berikut. <br><img src='./dalam-seberang.png' alt='soal segitiga' width='385'> <br>",
+      "📌<b>Luar berseberangan</b> : Jika dua buah garis sejajar dipotong oleh garis, maka sudut-sudut luar berseberangan sama besar ∠A1 = ∠B3, ∠A2 = ∠B4",
+      "Pada gambar di soal, x dan y sama-sama di kanan → tidak berseberangan",
+      "Untuk lebih jelas perhatikan gambar berikut. <br><img src='./luar-seberang.png' alt='soal segitiga' width='385'> <br>",
+      "Jadi, segitiga tersebut adalah sudut luar sepihak"
+
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "Jika jarak dua buah garis pada suatu bangun datar selalu sama, maka kedudukan kedua garis itu adalah....",
+    opsi: ["Berhimpit","Berpotongan","Sejajar","Tegak Lurus"],
+    jawaban: 2,
+    penyelesaian: [
+      "Kedudukan kedua garis tersebut adalah sejajar.",
+      "Garis sejajar didefinisikan sebagai dua garis atau lebih yang berada pada satu bidang datar, memiliki jarak antar garis yang selalu konsisten (sama), dan tidak akan pernah berpotongan atau bertemu meskipun diperpanjang sampai tak terhingga.",
+
+
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "Sudut terkecil yang dibentuk oleh jarum panjang dan jarum pendek pada pukul 09.30 adalah....",
+    opsi: [" sudut sejajar","sudut siku-siku","sudut lancip","sudut tumpul"],
+    jawaban: 3,
+    penyelesaian: [
+      "📝 Pukul 09.30 artinya:",
+      "• Jarum pendek (jam) ada di antara angka 9 dan 10",
+      "• Jarum panjang (menit) tepat di angka 6",
+      "📌 Posisi jarum panjang",
+      "Setiap angka di jam itu jaraknya 30°",
+      "Jarum panjang di angka 6 berarti:",
+      "6 × 30° = 180° dari angka 12",
+      "📌 Posisi jarum pendek",
+      "Kalau jam 9 tepat, jarum pendek di angka 9:",
+      "9 × 30° = 270° Tapi ini sudah setengah jam (30 menit), jadi jarum pendek geser sedikit ke arah 10.",
+      "Pergerakan jarum pendek:",
+      "• 1 jam = 60 menit = 30°",
+      "• 30 menit = 15°",
+      "Jadi posisi jarum pendek: 270° + 15° = 285°",
+      "📌 Mencari sudut di antara keduanya dengan selisih sudut:",
+      "Selisih sudut: 285° − 180° = 105° ",
+      "Jadi, sudut terkecilnya adalah 105°",
+      "📌 Yg ditanya adalah sudut yg terbentuk adalah?",
+      "Karena: 90° < 105° < 180° ⇒ sudut tumpul"
+
+
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan:" Besar pelurus sudut KLN pada gambar adalah....<br><img src='./pelurus.png' alt='soal segitiga' width='385'> <br>",
+    opsi: [" 72°","32°","65°","55°"],
+    jawaban: 0,
+    penyelesaian: [
+      "📝 Untuk menentukan besar pelurus sudut KLN, kita perlu memahami bahwa sudut yang saling berpelurus (suplemen) jika dijumlahkan hasilnya adalah 180°",
+      "📌 Menentukan nilai x",
+      "Dari gambar, sudut KLN dan sudut MLN membentuk garis lurus, sehingga:",
+      "∠KLN + ∠MLN = 180°",
+      "(3x + 15)° + (2x + 10)° = 180°",
+      "Gabungkan suku-suku sejenis:",
+      "3x + 15 + 2x + 10 = 180",
+      "5x + 25 = 180",
+      "5x = 155",
+      "x = 155 &frasl; 5",
+      "x = 31",
+      "📌 Menentukan besar pelurus sudut KLN",
+      "‼️ Ingat bahwa pelurus dari sudut KLN adalah sudut MLN itu sendiri (karena sudut MLN yg membuat sudut KLN menjadi 180°)",
+      "Maka, cukup menghitung besar sudut MLN:",
+      "pelurus ∠KLN = ∠MLN",
+      "pelurus ∠KLN = (2x + 10)°",
+      "substitusi nilai x = 31 ke ∠MLN:",
+      "pelurus ∠KLN = 2(31) + 10",
+      "pelurus ∠KLN = 62 + 10 = 72",
+      "jadi, pelurus sudut KLN adalah 72°"
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: " Pada segitiga ABC diketahui ∠C = 50° dan sudut pelurus ∠B = 100°. Jenis segitiga ABC adalah …",
+    opsi: ["Segitiga tumpul","Segitiga sembarang","Segitiga sama kaki","segitiga sama sisi"],
+    jawaban: 2,
+    penyelesaian: [
+      "📌 Diketahui:",
+      "∠C = 50°",
+      "Sudut pelurus ∠B = 100° → berarti ∠B = 180° − 100° = 80°",
+      "Jumlah sudut segitiga:",
+      "∠A = 180° − (80° + 50°) = 50°",
+      "Jadi sudut-sudutnya adalah:",
+      "∠A = 50°, ∠B = 80°, ∠C = 50°",
+      "Karena ada dua sudut sama (A = C), maka merupakan segitiga sama kaki.",
+      "Jadi, segitiga ABC adalah segitiga sama kaki."
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "Dua garis yang berpotongan membentuk sudut...",
+    opsi: ["Sehadap","Bertolak belakang","sepihak","Semua benar"],
+    jawaban: 1,
+    penyelesaian: [
+      "📝 Dua garis yang berpotongan akan membentuk 4 sudut, yg terdiri dari:",
+      "• 2 sudut sama besar (bertolak belakang)",
+      "• 2 sudut berpelurus (jumlahnya 180°)",
+      "Maka sudut yg terbentuk adalah sudut bertolak belakang."
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "<br><img src = './sudut-sdc.png'alt='soal segitiga' width='385'> <br> Jika ∠SDC = 65°, maka ∠ABC adalah....",
+    opsi: ["125°","115°","75°","45°"],
+    jawaban: 1,
+    penyelesaian: [
+      "📌Diketahui:",
+      "∠SDC = 65° (sudut luar di titik D)",
+      "ABCD adalah jajargenjang",
+      "✏️ Sudut dalam D:",
+      "∠ADC = 180° − 65° = 115°",
+      "✏️ Pada jajargenjang:",
+      "Sudut yang berhadapan sama besar : ∠ABC = ∠ADC",
+      "∠ABC = 115°",
+      "Besar ∠ABC adalah 115°."
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "1 &frasl; 6 putaran merupakan sudut...",
+    opsi: ["tumpul","sembarang","siku-siku","lancip"],
+    jawaban: 3,
+    penyelesaian: [
+      "📝 Satu putaran penuh = 360°",
+      "Untuk 1 &frasl; 6 putaran berlaku:",
+      "1 &frasl; 6 × 360° = 60°",
+      "Karena 60° < 90°, maka termasuk dalam sudut lancip."
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "<br><img src = './bf-sejajar-ae.png'alt='soal segitiga' width='385'> <br> Berdasarkan gambar diatas, manakah dari pernyataan berikut yg benar? ",
+    opsi: ["BF sejajar AE","AB sejajar dengan CG","EF memotong CD","AD bersilangan dengan DH"],
+    jawaban: 0,
+    penyelesaian: [
+      "📝 Analisis masing-masing opsi:",
+      "<b>opsi A</b> : BF sejajar AE : Garis BF dan AE keduanya adalah rusuk tegak pada balok tersebut. Keduanya memiliki arah yang sama (vertikal) dan jika diperpanjang tidak akan pernah berpotongan. Oleh karena itu, kedua garis ini sejajar <i>(Pernyataan benar)</i>",
+      "<b>opsi B</b> : AB sejajar dengan CG : Garis AB berada di bidang alas dan mengarah secara horizontal. Garis adalah garis tegak.Kedua garis ini tidak searah dan tidak berada pada satu bidang, sehingga kedudukannya adalah bersilangan. <i>(Pernyataan salah)</i>",
+      "<b>opsi C</b> : EF memotong CD : Garis EF berada di bidang atas (atap) dan CD berada di bidang alas (lantai). Keduanya searah (horizontal), namun berada di bidang yang berbeda. Kedudukan mereka adalah sejajar, bukan memotong <i>(Pernyataan salah)</i>",
+      "<b>opsi D</b> : AD bersilangan dengan DH : Garis AD dan DH bertemu di satu titik, yaitu titik D. Dua garis yang bertemu di satu titik disebut berpotongan, bukan bersilangan <i>(Pernyataan salah)</i>"
+  
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: " Diketahui sudut A dan sudut B saling berpelurus. Jika besar sudut A = 105°, berapakah besar sudut B?",
+    opsi: ["45°","55°","75°","90°"],
+    jawaban: 2,
+    penyelesaian: [
+      "📌 Diketahui:",
+      "∠A = 105°",
+      "sudut A dan B sudut B saling berpelurus",
+      "📝 Untuk menghhitung sudut B, manfaatkan jumlah sudut:",
+      "Sudut berpelurus berjumlah 180°",
+      "∠A + ∠B = 180°",
+      "105° + ∠B = 180°",
+      "∠B = 180° - 105°",
+      "∠B = 75°"
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: " Dua garis sejajar dipotong oleh garis lain. Jika sudut sehadap besarnya (2x + 15)° dan 55°, tentukan nilai <i>x</i>",
+    opsi: ["14","20","21","24"],
+    jawaban: 1,
+    penyelesaian: [
+      "📌 Diketahui:",
+      "Sudut sehadap besarnya: (2x + 15)° dan 55°",
+      "📝 Sudut sehadap besarnya sama.",
+      "2x + 15 = 55",
+      "2x = 55 - 15",
+      "2x = 40",
+      "x = 40 &frasl; 2",
+      "x = 20",
+      "Jadi, nilai x  adalah 20."
+    ]
+},
+{
+    kategori: "Sudut & garis",
+    pertanyaan: "<br><img src='./sudut-cba.png' alt='soal segitiga' width='385'> <br>Besar ∠BCA adalah...",
+    opsi: ["55°","65°","90°","70°"],
+    jawaban: 3,
+    penyelesaian: [
+      "📌 Diketahui:",
+      "∠A = 42°",
+      "Sudut di B = 112° (sudut luar)",
+      "📌 ∠CBA artinya sudut yg dibentuk oleh garis CB & CA, maka:",
+      "✏️ Mencari sudut dalam B",
+      "Karena sudut luar B = 112°, maka:",
+      "∠B dalam = 180° − 112° = 68°",
+      "✏️ Jumlah sudut segitiga",
+      "Dalam segitiga:",
+      "∠A + ∠B + ∠C = 180°",
+      "42° + 68° + ∠C = 180°",
+      "∠C = 180° - 110° = 70°",
+      "Jadi ∠BCA = 70°"
+    ]
+}
+];
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

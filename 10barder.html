@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latihan Soal - Barisan dan Deret | Kelas 10</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📐 Barisan dan Deret</h1>
+  <p>Latihan Soal Matematika &bull; Kelas 10 &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+  {
+    kategori: "Barisan Aritmetika",
+    pertanyaan: "Diketahui barisan aritmetika: 3, 7, 11, 15, ... Berapakah suku ke-20 dari barisan tersebut?",
+    opsi: ["75", "79", "83", "87"],
+    jawaban: 1,
+    penyelesaian: [
+      "Identifikasi: <span class='rumus'>a = 3</span> (suku pertama), <span class='rumus'>b = 7 - 3 = 4</span> (beda).",
+      "Gunakan rumus suku ke-n: <span class='rumus'>Uₙ = a + (n − 1) × b</span>",
+      "Hitung suku ke-20: <span class='rumus'>U₂₀ = 3 + (20 − 1) × 4</span>",
+      "<span class='rumus'>U₂₀ = 3 + 19 × 4 = 3 + 76 = 79</span>",
+      "<span class='jawaban-akhir'>Jawaban: 79</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Aritmetika",
+    pertanyaan: "Suatu barisan aritmetika memiliki suku pertama 5 dan beda 3. Suku ke berapa yang bernilai 56?",
+    opsi: ["17", "18", "19", "20"],
+    jawaban: 2,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>a = 5</span>, <span class='rumus'>b = 3</span>, <span class='rumus'>Uₙ = 56</span>.",
+      "Gunakan rumus: <span class='rumus'>Uₙ = a + (n − 1) × b</span>",
+      "<span class='rumus'>56 = 5 + (n − 1) × 3</span>",
+      "<span class='rumus'>51 = (n − 1) × 3</span>",
+      "<span class='rumus'>n − 1 = 17 → n = 18</span>",
+      "<span class='jawaban-akhir'>Jawaban: suku ke-18</span>"
+    ]
+  },
+  {
+    kategori: "Deret Aritmetika",
+    pertanyaan: "Jumlah 15 suku pertama deret aritmetika 2 + 5 + 8 + 11 + ... adalah ...",
+    opsi: ["315", "330", "345", "360"],
+    jawaban: 1,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>a = 2</span>, <span class='rumus'>b = 3</span>, <span class='rumus'>n = 15</span>.",
+      "Gunakan rumus: <span class='rumus'>Sₙ = n/2 × (2a + (n − 1) × b)</span>",
+      "<span class='rumus'>S₁₅ = 15/2 × (2(2) + (15 − 1) × 3)</span>",
+      "<span class='rumus'>S₁₅ = 7,5 × (4 + 42)</span>",
+      "<span class='rumus'>S₁₅ = 7,5 × 46 = 345</span>",
+      "<span class='jawaban-akhir'>Jawaban: 345</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Geometri",
+    pertanyaan: "Diketahui barisan geometri: 2, 6, 18, 54, ... Suku ke-6 dari barisan tersebut adalah ...",
+    opsi: ["486", "972", "1.458", "1.944"],
+    jawaban: 2,
+    penyelesaian: [
+      "Identifikasi: <span class='rumus'>a = 2</span>, <span class='rumus'>r = 6/2 = 3</span>.",
+      "Gunakan rumus: <span class='rumus'>Uₙ = a × r^(n−1)</span>",
+      "<span class='rumus'>U₆ = 2 × 3^(6−1) = 2 × 3⁵</span>",
+      "<span class='rumus'>2 × 243 = 486</span>",
+      "Periksa: U₅ = 2 × 3⁴ = 162, U₆ = 162 × 3 = 486",
+      "<span class='jawaban-akhir'>Jawaban: 486</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Geometri",
+    pertanyaan: "Suku ketiga dan suku keenam suatu barisan geometri berturut-turut adalah 8 dan 64. Rasio barisan tersebut adalah ...",
+    opsi: ["2", "3", "4", "8"],
+    jawaban: 0,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>U₃ = 8</span> dan <span class='rumus'>U₆ = 64</span>.",
+      "Hubungan: <span class='rumus'>U₆ = U₃ × r³</span>",
+      "<span class='rumus'>64 = 8 × r³</span>",
+      "<span class='rumus'>r³ = 8 → r = 2</span>",
+      "<span class='jawaban-akhir'>Jawaban: r = 2</span>"
+    ]
+  },
+  {
+    kategori: "Deret Geometri",
+    pertanyaan: "Jumlah 5 suku pertama deret geometri 3 + 6 + 12 + 24 + ... adalah ...",
+    opsi: ["89", "91", "93", "95"],
+    jawaban: 2,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>a = 3</span>, <span class='rumus'>r = 2</span>, <span class='rumus'>n = 5</span>.",
+      "Gunakan rumus (r ≠ 1): <span class='rumus'>Sₙ = a × (rⁿ − 1) / (r − 1)</span>",
+      "<span class='rumus'>S₅ = 3 × (2⁵ − 1) / (2 − 1)</span>",
+      "<span class='rumus'>S₅ = 3 × (32 − 1) / 1 = 3 × 31 = 93</span>",
+      "<span class='jawaban-akhir'>Jawaban: 93</span>"
+    ]
+  },
+  {
+    kategori: "Deret Geometri Tak Hingga",
+    pertanyaan: "Jumlah tak hingga deret geometri 4 + 2 + 1 + ½ + ... adalah ...",
+    opsi: ["6", "7", "8", "9"],
+    jawaban: 2,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>a = 4</span>, <span class='rumus'>r = 2/4 = ½</span>.",
+      "Karena |r| < 1, maka deret konvergen.",
+      "Gunakan rumus: <span class='rumus'>S∞ = a / (1 − r)</span>",
+      "<span class='rumus'>S∞ = 4 / (1 − ½) = 4 / ½ = 8</span>",
+      "<span class='jawaban-akhir'>Jawaban: 8</span>"
+    ]
+  },
+  {
+    kategori: "Sisipan Barisan",
+    pertanyaan: "Di antara dua bilangan 2 dan 20 disisipkan 8 bilangan sehingga membentuk barisan aritmetika. Beda barisan yang terbentuk adalah ...",
+    opsi: ["1,5", "2", "2,5", "3"],
+    jawaban: 1,
+    penyelesaian: [
+      "Dua bilangan asli: 2 dan 20. Disisipkan 8 bilangan, jadi total suku = 10.",
+      "Diketahui: <span class='rumus'>U₁ = 2</span>, <span class='rumus'>U₁₀ = 20</span>, <span class='rumus'>n = 10</span>.",
+      "Gunakan: <span class='rumus'>Uₙ = a + (n − 1) × b</span>",
+      "<span class='rumus'>20 = 2 + (10 − 1) × b</span>",
+      "<span class='rumus'>18 = 9b → b = 2</span>",
+      "<span class='jawaban-akhir'>Jawaban: beda = 2</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Aritmetika",
+    pertanyaan: "Suku pertama suatu barisan aritmetika adalah 10 dan suku ke-11 adalah 50. Beda barisan tersebut adalah ...",
+    opsi: ["3", "4", "5", "6"],
+    jawaban: 1,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>U₁ = 10</span>, <span class='rumus'>U₁₁ = 50</span>.",
+      "Gunakan: <span class='rumus'>U₁₁ = a + (11 − 1) × b</span>",
+      "<span class='rumus'>50 = 10 + 10b</span>",
+      "<span class='rumus'>40 = 10b → b = 4</span>",
+      "<span class='jawaban-akhir'>Jawaban: beda = 4</span>"
+    ]
+  },
+  {
+    kategori: "Deret Aritmetika",
+    pertanyaan: "Sebuah gedung bioskop memiliki 20 baris kursi. Baris pertama ada 10 kursi, setiap baris berikutnya bertambah 3 kursi. Total kursi seluruh gedung adalah ...",
+    opsi: ["770", "770", "770", "770"],
+    jawaban: 0,
+    penyelesaian: [
+      "Baris ke-n merupakan barisan aritmetika: <span class='rumus'>a = 10</span>, <span class='rumus'>b = 3</span>, <span class='rumus'>n = 20</span>.",
+      "Gunakan: <span class='rumus'>Sₙ = n/2 × (2a + (n − 1) × b)</span>",
+      "<span class='rumus'>S₂₀ = 20/2 × (2(10) + (20 − 1) × 3)</span>",
+      "<span class='rumus'>= 10 × (20 + 57)</span>",
+      "<span class='rumus'>= 10 × 77 = 770</span>",
+      "<span class='jawaban-akhir'>Jawaban: 770 kursi</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Geometri",
+    pertanyaan: "Sebuah bola dijatuhkan dari ketinggian 80 m. Setiap kali memantul, bola mencapai ¾ dari tinggi sebelumnya. Tinggi pantulan ke-4 adalah ...",
+    opsi: ["25,3125 m", "30 m", "33,75 m", "40 m"],
+    jawaban: 0,
+    penyelesaian: [
+      "Barisan: tinggi pantulan ke-n membentuk barisan geometri.",
+      "Diketahui: <span class='rumus'>a = 80</span>, <span class='rumus'>r = ¾</span>.",
+      "Pantulan ke-4 adalah suku ke-4: <span class='rumus'>U₄ = a × r³</span>",
+      "<span class='rumus'>U₄ = 80 × (¾)³ = 80 × 27/64</span>",
+      "<span class='rumus'>= 2160/64 = 33,75</span>",
+      "Namun pantulan ke-1 = U₁ = 80 × ¾ = 60, ke-2 = 45, ke-3 = 33,75, ke-4 = 25,3125",
+      "<span class='jawaban-akhir'>Jawaban: 25,3125 m (pantulan ke-4 = a × r⁴ = 80 × (3/4)⁴)</span>"
+    ]
+  },
+  {
+    kategori: "Deret Geometri",
+    pertanyaan: "Jumlah deret geometri tak hingga ½ + ¼ + ⅛ + ... adalah ...",
+    opsi: ["½", "1", "2", "3"],
+    jawaban: 1,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>a = ½</span>, <span class='rumus'>r = ½</span>.",
+      "Karena |r| = ½ < 1, deret konvergen.",
+      "Gunakan: <span class='rumus'>S∞ = a / (1 − r)</span>",
+      "<span class='rumus'>S∞ = ½ / (1 − ½) = ½ / ½ = 1</span>",
+      "<span class='jawaban-akhir'>Jawaban: 1</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Aritmetika",
+    pertanyaan: "Jika suku ke-4 dan suku ke-9 barisan aritmetika berturut-turut adalah 11 dan 26, maka suku pertamanya adalah ...",
+    opsi: ["1", "2", "3", "4"],
+    jawaban: 1,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>U₄ = 11</span>, <span class='rumus'>U₉ = 26</span>.",
+      "Selisih: <span class='rumus'>U₉ − U₄ = 5b</span>",
+      "<span class='rumus'>26 − 11 = 5b → 15 = 5b → b = 3</span>",
+      "Cari a: <span class='rumus'>U₄ = a + 3b = a + 9 = 11</span>",
+      "<span class='rumus'>a = 11 − 9 = 2</span>",
+      "<span class='jawaban-akhir'>Jawaban: a = 2</span>"
+    ]
+  },
+  {
+    kategori: "Deret Aritmetika",
+    pertanyaan: "Nilai dari 1 + 2 + 3 + ... + 100 adalah ...",
+    opsi: ["4950", "5050", "5100", "5150"],
+    jawaban: 1,
+    penyelesaian: [
+      "Ini adalah deret aritmetika dengan <span class='rumus'>a = 1</span>, <span class='rumus'>b = 1</span>, <span class='rumus'>n = 100</span>.",
+      "Gunakan rumus: <span class='rumus'>Sₙ = n/2 × (a + Uₙ)</span>",
+      "<span class='rumus'>S₁₀₀ = 100/2 × (1 + 100)</span>",
+      "<span class='rumus'>= 50 × 101 = 5050</span>",
+      "Rumus ini juga dikenal sebagai rumus Gauss.",
+      "<span class='jawaban-akhir'>Jawaban: 5050</span>"
+    ]
+  },
+  {
+    kategori: "Barisan Geometri",
+    pertanyaan: "Suku ke-2 dan suku ke-5 barisan geometri berturut-turut adalah 6 dan 162. Suku ke-4 barisan tersebut adalah ...",
+    opsi: ["27", "54", "81", "108"],
+    jawaban: 1,
+    penyelesaian: [
+      "Diketahui: <span class='rumus'>U₂ = 6</span>, <span class='rumus'>U₅ = 162</span>.",
+      "Hubungan: <span class='rumus'>U₅ = U₂ × r³</span>",
+      "<span class='rumus'>162 = 6 × r³ → r³ = 27 → r = 3</span>",
+      "Cari a: <span class='rumus'>U₂ = a × r = 6 → a = 6/3 = 2</span>",
+      "Hitung U₄: <span class='rumus'>U₄ = 2 × 3³ = 2 × 27 = 54</span>",
+      "<span class='jawaban-akhir'>Jawaban: 54</span>"
+    ]
+  }
+];
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

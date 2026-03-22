@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Latihan Soal - SEGI EMPAT | Kelas VII</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #e0e0e0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #a0a0c0;
+    }
+
+    .score-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .score-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 12px;
+      padding: 16px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-width: 120px;
+    }
+
+    .score-card .label {
+      font-size: 0.8rem;
+      color: #a0a0c0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .score-card.total .value { color: #e0e0e0; }
+    .score-card.correct .value { color: #4ade80; }
+    .score-card.wrong .value { color: #f87171; }
+
+    .question-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .question-card:hover {
+      box-shadow: 0 4px 30px rgba(233, 69, 96, 0.15);
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-number {
+      background: #e94560;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .question-category {
+      font-size: 0.8rem;
+      color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 140, 222, 0.3);
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #d0d0e0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: #7b8cde;
+      background: rgba(123, 140, 222, 0.1);
+      color: #ffffff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn .opt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    .option-btn.correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .option-btn.correct .opt-label {
+      background: #4ade80;
+      color: #0a1628;
+    }
+
+    .option-btn.wrong {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+      color: #f87171;
+    }
+
+    .option-btn.wrong .opt-label {
+      background: #f87171;
+      color: #0a1628;
+    }
+
+    .option-btn.reveal-correct {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, 0.07);
+      color: #4ade80;
+    }
+
+    .option-btn.reveal-correct .opt-label {
+      background: rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.1);
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      color: #f87171;
+    }
+
+    .penyelesaian {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .penyelesaian.show { display: block; }
+
+    .penyelesaian h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7b8cde;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .penyelesaian h4::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(123, 140, 222, 0.3);
+    }
+
+    .penyelesaian ol {
+      padding-left: 20px;
+      color: #c0c0d8;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    .penyelesaian ol li {
+      margin-bottom: 4px;
+    }
+
+    .penyelesaian .rumus {
+      display: inline-block;
+      background: rgba(123, 140, 222, 0.15);
+      border: 1px solid rgba(123, 140, 222, 0.3);
+      color: #b0beff;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .penyelesaian .jawaban-akhir {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      padding: 4px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    .show-solution-btn {
+      background: none;
+      border: 1px solid rgba(123, 140, 222, 0.4);
+      color: #7b8cde;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .show-solution-btn:hover {
+      background: rgba(123, 140, 222, 0.1);
+      border-color: #7b8cde;
+      color: #a0b0ff;
+    }
+
+    .result-summary {
+      display: none;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 36px 24px;
+      margin-top: 30px;
+    }
+
+    .result-summary.show { display: block; }
+
+    .result-summary h2 {
+      font-size: 1.5rem;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    .result-summary .final-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 16px 0;
+    }
+
+    .result-summary p {
+      color: #a0a0c0;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .restart-btn {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .restart-btn:hover {
+      background: #c73050;
+      transform: scale(1.03);
+    }
+
+    .status-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+    }
+
+    .tag-benar {
+      font-size: 0.75rem;
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .question-text { font-size: 0.95rem; }
+      .score-bar { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔢 SEGI EMPAT</h1>
+  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 15 Soal Pilihan Ganda</p>
+</header>
+
+<div class="score-bar">
+  <div class="score-card total">
+    <div class="label">Total Soal</div>
+    <div class="value" id="totalSoal">15</div>
+  </div>
+  <div class="score-card correct">
+    <div class="label">Benar</div>
+    <div class="value" id="correctCount">0</div>
+  </div>
+  <div class="score-card wrong">
+    <div class="label">Salah</div>
+    <div class="value" id="wrongCount">0</div>
+  </div>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="result-summary" id="resultSummary">
+  <h2>🎉 Selesai!</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="resultMessage"></p>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+</div>
+
+<script>
+const soalData = [
+{
+kategori: "segi empat",
+pertanyaan: "Berikut ini merupakan sifat persegi panjang, <i>kecuali</i>.....",
+opsi: ["Diagonal-diagonalnya berpotongan dan membagi dua sama panjang","Diagonalnya sama panjang","Diagonal-diagonalnya berpotongan tegak lurus","Sisi-sisi yg berhadapan sama panjang & sejajar"],
+jawaban: 2,
+penyelesaian: [
+  "📝 Sifat-sifat persegi panjang:",
+  "📌 Sisi berhadapan sama panjang & sejajar",
+  "📌 Semua sudut 90°",
+  "📌 Diagonal sama panjang",
+  "📌 Diagonal saling membagi dua",
+  "🔍 Cek masing-masing opsi:",
+  "<b>Opsi A. Diagonal-diagonalnya berpotongan dan membagi dua sama panjang </b> : ✔️ Benar → Diagonal persegi panjang memang saling membagi dua sama panjang",
+  "<b>Opsi B. Diagonalnya sama panjang</b> : ✔️ Benar → Ini ciri khas persegi panjang",
+  "<b>Opsi C. Diagonal-diagonalnya berpotongan tegak lurus</b> : ✖️ Salah, karena diagonal pada persegi panjang tidak tegak lurus dan sifat ini milik belah ketupat atau layang layang, bukan persegi panjang.",
+  "<b>Opsi D. Sisi-sisi yg berhadapan sama panjang & sejajar</b> : ✔️ Benar → Ini sifat utama persegi panjang",
+  "Kesimpulan : yang bukan sifat segiempat adalah: Diagonal-diagonalnya berpotongan tegak lurus"
+]
+},
+{
+kategori: "Belah ketupat",
+pertanyaan: "Perhatikan gambar berikut. <br><img src='./belah-ketupat.png' alt='soal segitiga' width='385'> <br> Jika KLMN adalah belah ketupat dengan panjang KM = 24 cm dan LN = 32 cm, maka panjang KO adalah.... ",
+opsi: ["10 cm","12 cm","18 cm","16 cm"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Diketahui:",
+  "• Bangun: Belah ketupat KLMN",
+  "• Diagonal 1 (<i>d<sub>1</sub></i>) : KM = 24 cm",
+  "• Diagonal 2 (<i>d<sub>2</sub></i>) : LN = 32 cm",
+  "• Titik O : Titik potong kedua diagonal.",
+  "📝 Sifat Belah Ketupat:",
+  "Salah satu sifat utama belah ketupat adalah kedua diagonalnya saling berpotongan tegak lurus dan saling membagi dua sama panjang.",
+  "Ini berarti:",
+  "• Titik O membagi diagonal KM menjadi dua bagian yang sama: KO = OM",
+  "• Titik O membagi diagonal LN menjadi dua bagian yang sama: LO = ON",
+  "📝 Untuk mencari panjang KO,  kita cukup membagi panjang diagonal KM dengan 2:",
+  "KO = 1 &frasl; 2 × KM",
+  "KO = 1 &frasl; 2 × 24 cm",
+  "KO = 12 cm",
+  "Jadi, panjang KO adalah 12 cm"
+
+
+]
+},
+{
+kategori: "Persegi panjang",
+pertanyaan: "Diberikan persegi panjang ABCD dengan kelilingnya 84 cm dan perbandingan panjang dan lebarnya adalah 4 : 3, maka luasnya adalah....",
+opsi: ["432 cm<sup>2</sup>","410 cm<sup>2</sup>","340 cm<sup>2</sup>","415 cm<sup>2</sup>"],
+jawaban: 0,
+penyelesaian: [
+  "📌 Diketahui:",
+  "• keliling (<b>K</b>) = 84 cm",
+  "• Perbandingan panjang (<i>p</i>) dan lebar (<i>l</i>) = 4 : 3",
+  "• Rumus keliling persegi panjang : <b>K</b> = 2 × (<i>p</i> + <i>l</i>)",
+  "Misalkan panjang = 4x dan lebar = 3x, maka :",
+  "84 = 2 × (4x + 3x) (<i> substitusi nilai yg diketahui ke rumus keliling persegi panjang</i>)",
+  "84 = 2 × 7x",
+  "84 &frasl; 2 = 7x",
+  "42 = 7x",
+  "x = 6",
+  "✏️ Mencari panjang & lebar persegi panjang sebenarnya",
+  "• panjang (<i>p</i>) = 4x = 4 × 6 = 24 cm",
+  "• lebar (<i>l</i>) = 3x = 3 × 6 = 18 cm",
+  "✏️ Menghitung Luas",
+  "Manfaatkan rumus luas : <b>L</b> = <i>p</i> × <i>l</i>",
+  "L = 24 cm × 18 cm = 432 cm<sup>2</sup>",
+  "Jadi, luas persegi panjang adalah 432 cm<sup>2</sup>"
+]
+},
+{
+kategori: "Trapesium",
+pertanyaan: "Sebidang tanah berbentuk trapesium sama kaki. Panjang sisi sejajarnya 24 m dan 14 m, dan jarak sisi sejajar nya 12 m. Jika sekeliling tanah tersebut di buat pagar, berapakah panjang pagar seluruh nya?",
+opsi: ["48 m","64 m","54 m","60 m"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Diketahui:",
+  "• sisi sejajar = 24 m dan 14 m",
+  "• Tinggi (jarak antar sisi sejajar) = 12 m",
+  "📌 Ditanya : Keliling (panjang pagar)",
+  "📝 Cari panjang sisi miring:",
+  "Selisih sisi sejajar : 24 - 14 = 10 ",
+  "Karena sama kaki, dibagi dua :",
+  "10 &frasl; 2 = 5",
+  "📐 Gunakan teorema phytagoras:",
+  "Sisi miring = &radic;(12<sup>2</sup> + 5<sup>2</sup>) = &radic;(144 + 25)",
+  "&radic;(144 + 25) = &radic;(169) = 13 cm",
+  "📐 Hitung keliling",
+  "<b>K</b> = 24 + 24 + 13 + 13",
+  "<b>K</b> = 64 m",
+  "Jadi, panjang pagar seluruhnya = 64 cm"
+]
+},
+{
+kategori: "Jajar genjang",
+pertanyaan: "Perhatikan gambar jajar genjang ABCD dibawah! Jika AB = 5cm, BC = 4cm, DP = 3cm. Maka berapakah panjang DQ? <br><img src='./jajar-genjang.png' alt='soal segitiga' width='385'> <br>",
+opsi: ["6 cm","12 cm","4,9 cm","12 cm"],
+jawaban: 3,
+penyelesaian: [
+  "📌 Diketahui:",
+  "• AB sebagai alas (<i>a<sub>1</sub> </i>) = 5 cm",
+  "• DP sebagai tinggi (<i>t<sub>1</sub> </i>) = 3 cm",
+  "• BC sebagai alas (<i>a<sub>2</sub> </i>) = 4 cm",
+  "• DQ sebagai tinggi (<i>t<sub>2</sub> </i>) = ?",
+  "📐 Menghitung luas jajar genjang:",
+  "Untuk mencari luas jajar genjang, gunakan alas AB dan tinggi DP:",
+  "Luas = AB × DP",
+  "Luas = 5 cm × 3 cm",
+  "Luas = 15 cm<sup>2</sup>",
+  "📐 Menghitung panjang DQ",
+  "Karena luas jajar genjang tersebut sama, kita bisa mencari DQ menggunakan alas BC:",
+  "Luas = BC × DQ",
+  "15 cm<sup>2</sup> = 4 cm × DQ",
+  "DQ = 15 &frasl; 4",
+  "DQ = 3,75 cm",
+  "Jadi, panjang DQ adalah 3,75 cm"
+]
+},
+{
+kategori: "Layang - layang",
+pertanyaan: "Perhatikan gambar layang - layang berikut! <br><img src='./layang-layang.png' alt='soal segitiga' width='385'> <br> Panjang AD = 10 cm, AB = 17 cm, dan AC = 16 cm. Tentukan Luas layang – layang tersebut!",
+opsi: ["145 cm<sup>2</sup>","135 cm<sup>2</sup>","168 cm<sup>2</sup>","170 cm<sup>2</sup>"],
+jawaban: 2,
+penyelesaian: [
+  "📝 Untuk menghitung luas layang-layang ABCD pada gmabar, kita perlu mencari panjang kedua diagonalnya (<i>d<sub>1</sub></i> dan <i>d<sub>2</sub></i>)",
+  "📌 Diketahui :",
+  "• AD = 10 cm (sehingga CD = 10 cm)",
+  "• AB = 17 cm (sehingga BC = 17 cm)",
+  "• AC = 16 cm (<i>d<sub>1</sub></i> atau <i>d<sub>2</sub></i>)",
+  "✏️ Mencari panjang AO dan OC",
+  "Diagonal BD membagi diagonal AC menjadi dua bagian yang sama panjang dan saling tegak lurus di titik O.",
+  "AO = OC = 1 &frasl; 2 × AC = 1 &frasl; 2 × 16 cm = 8 cm",
+  "✏️ Mencari panjang DO (menggunakan Teorema Pythagoras pada segitiga ABO",
+  "DO = &radic;(AD<sup>2</sup> - AO<sup>2</sup>)",
+  "DO = &radic;(10<sup>2</sup> - 8<sup>2</sup>)",
+  "DO = &radic;(100 - 64) = &radic;(36) = 6 cm",
+  "✏️ Mencari panjang BO (menggunakan Teorema Pythagoras pada segitiga ABO",
+  "BO = &radic;(AB<sup>2</sup> - AO<sup>2</sup>)",
+  "BO = &radic;(17<sup>2</sup> - 8<sup>2</sup>)",
+  "BO = &radic;(289 - 64) = &radic;(225) = 15 cm",
+  "✏️ Mencari panjang BD (<i>d<sub>2</sub></i>)",
+  "BD = DO + BO = 6 cm + 15 cm = 21 cm",
+  "✏️ Menghitung Luas layang-layang",
+  "Luas = 1 &frasl; 2 × <i>d<sub>1</sub></i> × <i>d<sub>2</sub></i>",
+  "Luas = 1 &frasl; 2 × AC × BD",
+  "Luas = 1 &frasl; 2 × 16 × 21",
+  "Luas = 8 × 21 = 168 cm<sup>2</sup>",
+  "Jadi, luas layang-layang tersebut adalah 168 cm<sup>2</sup>"
+
+]
+},
+{
+kategori: "Jajar genjang",
+pertanyaan: "Perhatikan jajar genjang PQRS berikut! <br><img src='./jajar-genjang.png' alt='soal segitiga' width='385'> <br> Besar ∠Q pada jajar genjang PQRS adalah...",
+opsi: ["126°","54°","60°","48°"],
+jawaban: 1,
+penyelesaian: [
+  "📝 kita bisa mencari besar ∠Q dengan menggunakan sifat dasar jajar genjang.",
+  "📐 Sifat Sudut Jajar Genjang:",
+  "• Sudut yang berdekatan (sepihak) jika dijumlahkan hasilnya adalah 180°.",
+  "• Sudut yang berhadapan besarnya sama.",
+  "📌 Diketahui:",
+  "• ∠P = 126°",
+  "Karena ∠P dan ∠Q adalah dua sudut yang berdekatan (terletak pada satu garis lurus di alas jajar genjang), maka:",
+  "∠P + ∠Q = 180°",
+  "126° + ∠Q = 180°",
+  "∠Q = 180° - 126° = 54°",
+  "Jadi, besar sudut Q pada jajar genjang tersebut adalah 54°"
+]
+},
+{
+kategori: "Persegi panjang",
+pertanyaan: "Diketahui suatu tanah berbentuk persegi dengan panjang sisi 12 meter. Tanah tersebut dijual dengan harga Rp 800.000,00 tiap 1 m². Harga jual tanah adalah....",
+opsi: ["Rp 115.200.000,00","Rp 112.000.000,00","Rp 72.000.000,00","Rp 135.000.000,00"],
+jawaban: 0,
+penyelesaian: [
+  "📌 Diketahui:",
+  "• Panjang sisi = 12 meter",
+  "• Harga jual tiap 1 m² = Rp 800.000,00",
+  "✏️ Menghitung Luas Tanah",
+  "Karena tanah tersebut berbentuk persegi, kita menggunakan rumus luas persegi:",
+  "Luas = sisi × sisi",
+  "Kita tahu bahwa panjang sisi = 12 meter, maka:",
+  "Luas = 12 m × 12 m = 144 m²",
+  "✏️ Menghitung Harga Jual Total",
+  "Harga jual dihitung dengan mengalikan total luas tanah dengan harga per meter perseginya.",
+  "Harga jual = Luas tanah × Harga tanah per m²",
+  "Harga jual = 144 × 800.000,00 = 115.200.000",
+  "Jadi, harga jual tanah adalah Rp 115.200.000"
+]
+},
+{
+kategori: "Belah ketupat",
+pertanyaan: "Sebuah bingkai berbentuk belah ketupat dengan panjang sisi 15 cm akan dibuat dari bambu. Pak Rudi mempunyai persediaan bambu sepanjang 480 cm. Banyak bingkai yg dapat dibuat Pak Rudi adalah?",
+opsi: ["6 bingkai","10 bingkai","13 bingkai","8 bingkai"],
+jawaban: 3,
+penyelesaian: [
+  "📌 Diketahui :",
+  "• Bentuk bingkai: belah ketupat",
+  "• Panjang sisi = 15 cm",
+  "• Total bambu = 480 cm",
+  "📐 Hitung keliling satu bingkai",
+  "Belah ketupat punya 4 sisi sama panjang:",
+  "K = 4 × 15 = 60 cm",
+  "📐Hitung jumlah bingkai",
+  "Jumlah bingkai = 480 &frasl; 60 = 8",
+  "Jadi, jumlah bingkai yg dapat dibuah Pak Rudi adalah 8 buah bingkai"
+]
+},
+{
+kategori: "Belah ketupat",
+pertanyaan: "Jika luas belah ketupat adalah 180 cm<sup>2</sup> dan perbandingan kedua diagonalnya adalah 2 : 5, maka panjang diagonal yg pendek adalah....",
+opsi: ["10 cm","13 cm","12 cm","24 cm"],
+jawaban: 2,
+penyelesaian: [
+  "📌 Diketahui :",
+  "• Luas belah ketupat = 180 cm²",
+  "• Perbandingan diagonal = 2 : 5",
+  "📐 Rumus luas belah ketupat:",
+  "L = 1 &frasl; 2 × <i>d<sub>1</sub></i> × <i>d<sub>1</sub></i>",
+  "Misalkan:",
+  "• <i>d<sub>1</sub></i> = 2x (diagonal pendek)",
+  "• <i>d<sub>1</sub></i> = 5x",
+  "📐 Substitusi ke rumus:",
+  "180 = 1 &frasl; × 2x × 5x",
+  "180 = 1 &frasl; × 10x",
+  "180 = 5x<sup>2</sup>",
+  "180 &frasl; 5 = x<sup>2</sup>",
+  "36 = x<sup>2</sup>",
+  "x = &radic;(36)",
+  "x = 6",
+  "Diagonal pendek:",
+  "<i>d<sub>1</sub></i> = 2x = 2 × 6 = 12 cm",
+  "Jadi, panjang diagonal pendeknya adalah 12 cm"
+]
+}
+]
+ ;
+
+let correctCount = 0;
+let wrongCount = 0;
+let answered = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+
+  soalData.forEach((soal, index) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `card-${index}`;
+
+    const opsiHTML = soal.opsi.map((opt, i) => {
+      const label = ['A', 'B', 'C', 'D'][i];
+      return `
+        <button class="option-btn" onclick="pilihJawaban(${index}, ${i})" id="opt-${index}-${i}">
+          <span class="opt-label">${label}</span>
+          <span>${opt}</span>
+        </button>`;
+    }).join('');
+
+    const penyelesaianHTML = soal.penyelesaian.map(step => `<li>${step}</li>`).join('');
+
+    card.innerHTML = `
+      <div class="question-header">
+        <span class="question-number">Soal ${index + 1}</span>
+        <span class="question-category">${soal.kategori}</span>
+      </div>
+      <p class="question-text">${soal.pertanyaan}</p>
+      <div class="options" id="opts-${index}">
+        ${opsiHTML}
+      </div>
+      <div class="feedback" id="fb-${index}"></div>
+      <button class="show-solution-btn" id="solbtn-${index}" style="display:none;" onclick="togglePenyelesaian(${index})">
+        📖 Tampilkan Penyelesaian
+      </button>
+      <div class="penyelesaian" id="sol-${index}">
+        <h4>Langkah Penyelesaian</h4>
+        <ol>${penyelesaianHTML}</ol>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function pilihJawaban(soalIndex, opsiIndex) {
+  const soal = soalData[soalIndex];
+  const allButtons = document.querySelectorAll(`#opts-${soalIndex} .option-btn`);
+  const fb = document.getElementById(`fb-${soalIndex}`);
+  const solBtn = document.getElementById(`solbtn-${soalIndex}`);
+
+  allButtons.forEach(btn => btn.disabled = true);
+
+  const selectedBtn = document.getElementById(`opt-${soalIndex}-${opsiIndex}`);
+  const correctBtn = document.getElementById(`opt-${soalIndex}-${soal.jawaban}`);
+
+  if (opsiIndex === soal.jawaban) {
+    selectedBtn.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.innerHTML = '✅ <strong>Benar!</strong> Jawaban kamu tepat.';
+    correctCount++;
+    document.getElementById('correctCount').textContent = correctCount;
+  } else {
+    selectedBtn.classList.add('wrong');
+    correctBtn.classList.add('reveal-correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.innerHTML = `❌ <strong>Salah.</strong> Jawaban yang benar adalah <strong>${['A','B','C','D'][soal.jawaban]}. ${soal.opsi[soal.jawaban]}</strong>.`;
+    wrongCount++;
+    document.getElementById('wrongCount').textContent = wrongCount;
+  }
+
+  solBtn.style.display = 'inline-block';
+  answered++;
+
+  if (answered === soalData.length) {
+    setTimeout(showResult, 500);
+  }
+}
+
+function togglePenyelesaian(index) {
+  const sol = document.getElementById(`sol-${index}`);
+  const btn = document.getElementById(`solbtn-${index}`);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+    btn.textContent = '📖 Tampilkan Penyelesaian';
+  } else {
+    sol.classList.add('show');
+    btn.textContent = '🔼 Sembunyikan Penyelesaian';
+  }
+}
+
+function showResult() {
+  const summary = document.getElementById('resultSummary');
+  const scoreEl = document.getElementById('finalScore');
+  const msgEl = document.getElementById('resultMessage');
+
+  const score = Math.round((correctCount / soalData.length) * 100);
+  scoreEl.textContent = `${score} / 100`;
+
+  let msg = '';
+  if (score === 100) msg = '🌟 Sempurna! Kamu menguasai materi dengan sangat baik!';
+  else if (score >= 80) msg = '🎯 Sangat bagus! Terus pertahankan prestasimu!';
+  else if (score >= 60) msg = '👍 Cukup baik! Masih ada ruang untuk berkembang.';
+  else if (score >= 40) msg = '📚 Perlu belajar lebih banyak. Jangan menyerah!';
+  else msg = '💪 Terus semangat! Ulang lagi materinya dan coba lagi.';
+
+  msgEl.textContent = `Kamu menjawab ${correctCount} soal benar dari ${soalData.length} soal. ${msg}`;
+  summary.classList.add('show');
+  summary.scrollIntoView({ behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  correctCount = 0;
+  wrongCount = 0;
+  answered = 0;
+  document.getElementById('correctCount').textContent = 0;
+  document.getElementById('wrongCount').textContent = 0;
+  document.getElementById('resultSummary').classList.remove('show');
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
