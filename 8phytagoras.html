@@ -409,93 +409,286 @@
 <script>
 const soalData = [
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
+kategori: "Rumus Phytagoras",
+pertanyaan: "Perhatikan gambar berikut ini! <br><img src='./pitagoras.png' alt='soal segitiga' width='385'> <br> Pernyataan-pernyataan dibawah ini yang benar untuk segitiga siku-siku ABC adalah....",
+opsi: ["c<sup>2</sup> + a<sup>2</sup> = b<sup>2</sup>","c<sup>2</sup> - b<sup>2</sup> = a<sup>2</sup>","c<sup>2</sup> + b<sup>2</sup> = a<sup>2</sup>","a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>"],
+jawaban: 3,
+penyelesaian: [
+  "📝 Segitiga siku-siku adalah segitiga yang punya satu sudut 90° (siku-siku). Sisi yang berhadapan dengan sudut 90° disebut sisi miring (hipotenusa) → biasanya dilambangkan c.",
+  "Dua sisi lainnya (yang membentuk sudut siku-siku) disebut:",
+  "• a",
+  "• b",
+  "📐 2. Konsep Teorema Pythagoras",
+  "Teorema ini bilang:",
+  "<b>Jumlah kuadrat dua sisi siku-siku sama dengan kuadrat sisi miring</b>",
+  "📌 Intinya:",
+  "• Sisi miring (c) selalu yang paling panjang",
+  "• Rumus selalu: a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>",
+  
+]
+},
+{
+kategori: "Menghitung Diagonal",
+pertanyaan: "Jika panjang sebuah persegi 20 cm, maka panjang diagonalnya adalah....",
+opsi: ["&radic;(20) cm","20 cm","20&radic;2 cm","&radic;(800) cm"],
 jawaban: 1,
 penyelesaian: [
-    ""
+  "🔷 1. Pahami dulu bentuknya",
+  "Persegi dengan sisi 20 cm kalau ditarik diagonalnya akan membentuk segitiga siku-siku:",
+  "• sisi a = 20 cm",
+  "• sisi b = 20 cm",
+  "• diagonal = sisi miring (c)",
+  "📐 2. Gunakan rumus Pythagoras",
+  "Substitusi:",
+  "20<sup>2</sup> + 20<sup>2</sup> = c<sup>2</sup>",
+  "400 + 400 = c<sup>2</sup>",
+  "800 = c<sup>2</sup>",
+  "📌 Di akarkan",
+  "c = &radic;(800)",
+  "c = &radic;(400 &times; 2)",
+  "c = 20 &radic;2"
+]
+},
+{
+kategori: "Bentuk Phytagoras",
+pertanyaan: "Pasangan 3 bilangan dibawah ini yang merupakan tripel phytagoras adalah",
+opsi: ["12,13,6","14,48,50","24,5,25","10,6,7"],
+jawaban: 1,
+penyelesaian: [
+  "📐 Konsepnya: suatu tripel Pythagoras adalah tiga bilangan yang memenuhi hubunga a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>, dengan c adalah bilangan terbesar.",
+  "📌 Analisis masing-masing opsi",
+  "<b>Opsi A 12, 13, 6</b> : ",
+  "• Bilangan terbesar = 13",
+  "• 12<sup>2</sup> + 6<sup>2</sup> = 144 + 36 = 180",
+  "• 13<sup>2</sup> = 169",
+  "Tidak sama → bukan",
+  "<b>Opsi B 14, 48, 50</b> :",
+  "• Bilangan terbesar = 50",
+  "• 14<sup>2</sup> + 48<sup>2</sup> = 196 + 2304 = 2500",
+  "• 50<sup>2</sup> = 2500",
+  "Sama → ini benar",
+  "<b>Opsi C 24, 5, 25</b>:",
+  "• Bilangan terbesar = 25",
+  "• 24<sup>2</sup> + 5<sup>2</sup> = 576 + 25 = 601",
+  "• 25<sup>2</sup> = 625",
+  "Tidak sama → bukan",
+  "<b>Opsi D 10, 6, 7</b> :"
+  "• Bilangan terbesar = 10",
+  "• 6<sup>2</sup> + 7<sup>2</sup> = 36 + 49 = 85",
+  "• 10<sup>2</sup> = 100",
+  "Tidak sama → bukan"
+]
+},
+{
+kategori: "Bentuk Phytagoras",
+pertanyaan: "Sebuah tangga yang panjangnya 5&radic; 2 meter disandarkan pada dinding. Jarak kaki tangga dengan dinding adalah 4 meter. Tinggi dinding yang dicapai tangga adalah",
+opsi: ["&radic;66 m","2,5 m","&radic;34 m","4 m"],
+jawaban: 2,
+penyelesaian: [
+  "🔺 1. Bentuk masalahnya",
+  "Tangga yang disandarkan ke dinding membentuk segitiga siku-siku:",
+  "Tangga = sisi miring (hipotenusa)",
+  "Jarak kaki tangga ke dinding = alas",
+  "Tinggi yang dicapai di dinding = tinggi (yang ditanya)",
+  "📐 2. Gunakan konsep Pythagoras",
+  "Rumus dasarnya: a<sup>2</sup> +b<sup>2</sup> = c<sup>2</sup>",
+  "Dalam soal ini:",
+  "c = panjang tangga = 5 &radic;2",
+  "a = jarak ke dinding = 4",
+  "b = tinggi yang dicari",
+  "🔍 3. Masukkan ke rumus",
+  "a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>",
+  "4<sup>2</sup> + b<sup>2</sup> = (5 &radic; 2)<sup>2</sup>",
+  "16 + b<sup>2</sup> = 5<sup>2</sup> &times; (&radic; 2)<sup>2</sup>",
+  "16 + b<sup>2</sup> = 25 &times; 2",
+  "16 +  b<sup>2</sup> = 50",
+  "b<sup>2</sup> = 50 - 16",
+  " b<sup>2</sup> = 34",
+  "📌 Di akarkan",
+  "b = &radic;34",
+  "Jadi, tinggi dinding yang dicapai tangga adalah &radic;34 m."
+]
+},
+{
+kategori: "Bentuk Phytagoras",
+pertanyaan: "Amir akan membuat penggaris yang berbentuk segitiga siku-siku dengan bahan dari kayu. Panjang salah satu sisi siku-siku  24 cm dan panjang sisi miring  25 cm. Jika Amir ingin membuat 30 buah penggaris, berapa meter panjang kayu yang dibutuhkan? ",
+opsi: ["16,8 meter","30 meter","24 meter","18 meter"],
+jawaban: 0,
+penyelesaian: [
+  "📝 Mencari Panjang Sisi Siku-siku yang Belum Diketahui",
+  "Karena penggaris berbentuk segitiga siku-siku, kita dapat menggunakan Teorema Pythagoras untuk mencari panjang sisi ketiga.",
+  "Sisi miring (<i>c</i>) = 25 cm",
+  "Salah satu sisi siku-siku (<i>a</i>) = 24 cm",
+  "Sisi siku-siku lainnya (<i>b</b>) = ?",
+  "📐 Gunakan rumus phytagoras: a<sup>2</sup> +b<sup>2</sup> = c<sup>2</sup>",
+  "Substitusi:",
+  "a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>",
+  "24<sup>2</sup> + b<sup>2</sup> = 25<sup>2</sup.",
+  "576 + b<sup>2</sup> = 625",
+  "b<sup>2</sup> = 625 - 576",
+  "b<sup>2</sup> = 49",
+  "📌 Di akarkan",
+  "b = &radic;49",
+  "b = 7 cm",
+  "📐 Menghitung Keliling Satu Penggaris",
+  "Keliling segitiga adalah jumlah dari ketiga sisinya. Ini mewakili panjang kayu yang dibutuhkan untuk membuat satu buah penggaris.",
+  "Keliling = 24 cm + 25 cm + 7cm",
+  "Keliling = 56 cm",
+  "📐 Menghitung Total Panjang Kayu untuk 30 Penggaris",
+  "Amir ingin membuat 30 buah penggaris, maka:",
+  "Total panjang (cm) = 30 &times; 56 cm",
+  "Total panjang (cm) = 1680 cm",
+  "📐 Konversi ke satuan meter",
+  "Karena pertanyaan meminta jawaban dalam satuan meter:",
+  "Total panjang (m) =  1680 &divide; 100",
+  "Total panjang(m) = 16,8 meter",
+  "Panjang kayu yang dibutuhkan Amir untuk membuat 30 buah penggaris adalah 16,8 meter."
+]
+},
+{
+kategori: "Konsep Phytagoras",
+pertanyaan: "Diketahui sebuah persegi panjang dengan panjangnya 24 cm dan panjang diagonalnya 30 cm. Luas persegi panjang tersebut adalah...",
+opsi: ["200 cm<sup>2</sup>","268 cm<sup>2</sup>","345 cm<sup>2</sup>","432 cm<sup>2</sup>"],
+jawaban: 3,
+penyelesaian: [
+  "🔷 Konsep dasar",
+  "Pada persegi panjang, diagonal membentuk segitiga siku-siku dengan:",
+  "panjang = salah satu sisi",
+  "lebar = sisi lainnya",
+  "diagonal = sisi miring",
+  "Jadi berlaku hubungan: (panjang)<sup>2</sup> + (lebar)<sup>2</sup> = (diagonal)<sup>2</sup>",
+  "📐 Masukkan nilai yang diketahui",
+  "Diketahui:",
+  "panjang = 24 cm",
+  "diagonal = 30 cm",
+  "lebar = ?",
+  "📌 Gunakan rumus:",
+  "24<sup>2</sup> + lebar<sup>2</sup> = 30<sup>2</sup>",
+  "576 + lebar<sup>2</sup> = 900",
+  "lebar<sup>2</sup> = 900 - 576",
+  "lebar<sup>2</sup> = 324",
+  "📌 Diakarkan:",
+  "lebar = &radic;324 = 18 cm",
+  "📐 Cari luas",
+  "Rumus luas untuk persegi adalah <i>L = p &times; l</i>",
+  "Substitusi:",
+  "<i>L</i> = 24 cm &times; 18 cm = 432 cm<sup>2</sup>",
+  "Jadi, luas persegi panjang tersebut adalah 432 cm<sup>2</sup>"
+  
+]
+},
+{
+kategori: "Phytagoras",
+pertanyaan: "Diketahui sebuah segitiga siku-siku memiliki panjang sisi-sisi 3x, 12, dan 5x. Jika sisi miringnya adalah 5x, maka tentukan panjang masing-masing sisi segitiga tersebut......",
+opsi: ["3 cm, 12 cm, dan 5 cm","12 cm, 16 cm, dan 20 cm","9 cm, 12 cm, dan 15 cm","6 cm, 12 cm, dan 10 cm"],
+jawaban: 2,
+penyelesaian: [
+  "📐 Mencari nilai x"
+  "🔷 Konsep dasar",
+  "Pada segitiga siku-siku berlaku:",
+  "sisi miring (terbesar) = 5x",
+  "sisi lainnya = 3x dan 12",
+  "📐 Manfaatkan rumus phytagoras:",
+  "<i>a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup> </i>",
+  "Substitusi:",
+  "(3x)<sup>2</sup> + 12<sup>2</sup> = (5x)<sup>2</sup>",
+  "9x<sup>2</sup> + 144 = 25x<sup>2</sup>",
+  "144 = 25x<sup>2</sup> - 9x<sup>2</sup>",
+  "144 = 16x<sup>2</sup>",
+  "16<sup>2</sup> = 144",
+  "x<sup>2</sup> = 144 &frasl; 16",
+  "x<sup>2</sup> = 9",
+  "📌 Akarkan:",
+  "x = &radic;9",
+  "x = 3", 
+  "Jadi, nilai x adalah 3",
+  "📐 Mencari panjang masing-masing sisi dengan substitusi nilai x.",
+  "Substitusi x = 3",
+  "3x = 3 &times; 3 = 9 cm",
+  "5x = 5 &times; 3 = 15 cm",
+  "12 = 12 cm"
+  "Panjang sisi-sisi segitiga adalah: 9 cm, 12 cm, dan 15 cm"
+]
+},
+{
+kategori: "Phytagoras",
+pertanyaan: "Perhatikan gambar berikut. <br><img src='./keliling-abcd.png' alt='soal segitiga' width='385'> <br> Jika panjang BD = 12 cm, Keliling bidang ABCD adalah..",
+opsi: ["66 cm","54 cm","55 cm","45 cm"],
+jawaban: 1,
+penyelesaian: [
+  "📌 Diketahui:",
+  "Panjang <i>BD</i> = 12 cm",
+  "📝 Dengan memperhatikan gambar, kita dapat dua segitiga siku-siku yaitu <i>ABD</i> dan <i>BCD</i>",
+  "📐 △ <i>ABD</i> siku siku di <i>D</i>,",
+  "AB<sup>2</sup> = AD<sup>2</sup> + BD<sup>2</sup>",
+  "20<sup>2</sup> = AD<sup>2</sup> + 12<sup>2</sup>",
+  "400 + AD<sup>2</sup> + 144",
+  "400 - 144 = AD<sup>2</sup>",
+  "AD<sup>2</sup> = 256",
+  "📌 Akarkan:",
+  "AD = &radic; 256 = 16 cm",
+  "📐 △ <i>BCD</i> siku-siku di B,",
+  "CD<sup>2</sup> = BC<sup>2</sup> + BD<sup>2</sup>",
+  "CD<sup>2</sup> = 5<sup>2</sup> + 12<sup>2</sup>",
+  "CD<sup>2</sup> = 169",
+  "📌 Akarkan:",
+  "CD = &radic; 169 = 13 cm",
+  " 📐Menghitung keliling",
+  "Keliling bidang adalah <i>AB</i> + <i>BC</i> + <i>CD</i> + <i>DA</i> = 20 + 5 + 13 + 16 = 54 cm",
+  "Jadi, keliling bidang ABCD adalah 54 cm "
+]
+},
+{
+kategori: "Phytagoras",
+pertanyaan: "Seorang pengamat berada di atas mercusuar yang tingginya 12 meter. Ia melihat kapal A dan kapal B yang berlayar di laut. Jarak pengamat dengan kapal  A dan kapal B berturut-turut adalah 20 meter dan 13 meter. Posisi kapal A, kapal B,dan kaki mercusuar terletak segaris. Jarak kapal A dan kapal B adalah... ",
+opsi: ["7 meter","11 meter","12 meter","15 meter"],
+jawaban: 2,
+penyelesaian: [
+  "🔷 Pahami situasi",
+  "<br><img src='./pengamat-mercusuar.png' alt='soal segitiga' width='385'> <br>"
+  "📌 Tinggi mercusuar = 12 m",
+  "📌 Jarak pengamat ke:",
+  "kapal A = 20 m",
+  "kapal B = 13 m",
+  "Karena kapal A, kapal B, dan kaki mercusuar segaris di laut, maka kita cari jarak mendatar (alas) masing-masing kapal dari kaki mercusuar.",
+  "📐 Gunakan Pythagoras",
+  "🛳️ Kapal A",
+  "jarak mendatar A (<i>alas</i>):",
+  "<i>alas</i><sup>2</sup> = 20<sup>2</sup> - 12<sup>2</sup> = 400 - 144 = 256",
+  "📌 Akarkan:",
+  "<i>alas</i> = &radic;256 = 16 m",
+  "🚢 Kapal B",
+  "Jarak mendatar B (<i>alas</i>) :",
+  "<i>alas</i><sup>2</sup> = 13<sup>2</sup> - 12<sup>2</sup> = 169 - 144 = 25",
+  "📌 Akarkan:",
+  "<i>alas</i> = &radic;25 = 5 m",
+  "📐 Cari jarak A ke B",
+  "📝 Konsep segaris (kolinear) adalah kondisi di mana dua atau lebih titik  terletak pada satu garis lurus yang sama"
+  "Karena segaris:",
+  "jarak A ke B = 16 − 5 = 11 meter"
+  
 ]
 },
 {
 kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+pertanyaan: "Sebuah tiang tingginya 12 m berdiri tegak di atas tanah datar. Dari ujung atas tiang ditarik seutas tali ke sebuah patok pada tanah. Jika panjang tali 15 m, maka jarak patok dengan pangkal tiang bagian bawah adalah...",
+opsi: ["9 meter","13 meter","7 meter","4 meter"],
+jawaban: 0,
 penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
-]
-},
-{
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
-penyelesaian: [
-    ""
+  "Jika kita gambarkan tiang dengan tali maka ilustrasinya dapat seperti berikut ini:",
+  "<br><img src='./jarak-patok.png' alt='soal segitiga' width='385'> <br>",
+  "Tiang berdiri tegak dengan tanah sehingga membentuk sudut siku-siku. Untuk menghitung jarak patok dengan tiang bagian bawah maka dapat kita gunakan teorema pythagoras.",
+  "📐 Rumus Phytagoras <i>a</i><sup>2</sup> + <i>b</i><sup>2</sup> = <i>c</i><sup>2</sup>",
+  "dengan:",
+  "<i>a</i><sup>2</sup> = alas (jarak patok dengan tiang bagian bawah) = ?",
+  "<i>b</i><sup>2</sup> =  tinggi = 12 m",
+  "<i>c</i><sup>2</sup> = sis miring = 15 m"
+  "&rArr; <i>a</i><sup>2</sup> + 12<sup>2</sup> = 15<sup>2</sup>",
+  "<i>a</i><sup>2</sup> + 144 = 225",
+  "<i>a</i><sup>2</sup> = 225 - 144 = 81",
+  "📌 Akarkan:",
+  "<i>a</i> = &radic;81 = 9 meter",
+  "Jadi, jarak patok dengan pangkal tiang bagian bawah adalah 9 meter"
 ]
 }
 ]
