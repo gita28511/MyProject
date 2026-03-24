@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <title>Latihan Soal - SEGI EMPAT | Kelas VII</title>
+  <title>Latihan Soal - RELASI & FUNGSI | Kelas VIII</title>
   <style>
     * {
       box-sizing: border-box;
@@ -378,14 +378,14 @@
 <body>
 
 <header>
-  <h1>🔢 SEGI EMPAT</h1>
-  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 15 Soal Pilihan Ganda</p>
+  <h1>🔢 RELASI & FUNGSI</h1>
+  <p>Latihan Soal Matematika &bull; Kelas VII &bull; 10 Soal Pilihan Ganda</p>
 </header>
 
 <div class="score-bar">
   <div class="score-card total">
     <div class="label">Total Soal</div>
-    <div class="value" id="totalSoal">15</div>
+    <div class="value" id="totalSoal">10</div>
   </div>
   <div class="score-card correct">
     <div class="label">Benar</div>
@@ -409,93 +409,247 @@
 <script>
 const soalData = [
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Pemetaan",
+pertanyaan: "Diagram panah di bawah ini yang merupakan pemetaan adalah...",
+opsi: ["<br><img src='./opsi-a1.png' alt='soal segitiga' width='260'> <br>","<br><img src='./opsi-b1.png' alt='soal segitiga' width='260'> <br>","<br><img src='./opsi-c1.png' alt='soal segitiga' width='260'> <br>","<br><img src='./opsi-d1.png' alt='soal segitiga' width='260'> <br>"],
+jawaban: 3,
 penyelesaian: [
-    ""
+  "📝 Pemetaan (atau fungsi) adalah relasi khusus yang memasangkan setiap anggota himpunan daerah asal (domain) dengan tepat satu anggota himpunan daerah kawan (kodomain).",
+  "📌 Analisis masing-masing opsi:",
+  "<b>Opsi A</b>",
+  "<br><img src='./opsi-a1.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Bukan pemetaan</b>",
+  "● Terdapat satu titik di himpunan sebelah kiri (daerah asal) yang memiliki dua panah keluar, menunjuk ke dua titik berbeda di himpunan sebelah kanan.",
+  "● Hal ini melanggar aturan "tepat satu" pasangan untuk setiap anggota daerah asal.",
+  "Karena ada satu anggota domain yang dipasangkan dengan lebih dari satu anggota kodomain, maka diagram panah ini bukan termasuk pemetaan.",
+  "<b>Opsi B</b>",
+  "<br><img src='./opsi-b1.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Bukan pemetaan</b>",
+  "● Anggota paling atas pada himpunan asal memiliki dua pasangan di himpunan kawan.",
+  "● Anggota paling bawah pada himpunan asal tidak memiliki pasangan di himpunan kawan.",
+  "Karena ada anggota himpunan asal yang memiliki lebih dari satu pasangan dan ada yang tidak memiliki pasangan, maka diagram panah tersebut bukan pemetaan. ",
+  "<b>Opsi C</b>",
+  "<br><img src='./opsi-c1.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Bukan pemetaan</b>",
+  "● Setiap anggota domain harus memiliki pasangan: Pada diagram tersebut, terdapat dua anggota himpunan asal (domain, himpunan di sebelah kiri) yang tidak memiliki panah (pasangan) sama sekali di himpunan kawan (kodomain, himpunan di sebelah kanan).",
+  "● Setiap anggota domain harus memiliki tepat satu pasangan: Salah satu anggota himpunan asal (yang paling bawah) memiliki tiga panah yang mengarah ke tiga anggota berbeda di himpunan kawan. Dalam pemetaan, setiap elemen di domain harus dipasangkan secara tepat dengan satu elemen di kodomain.",
+  "Karena kedua syarat penting pemetaan tidak terpenuhi, diagram panah ini hanya disebut sebagai relasi biasa, bukan pemetaan atau fungsi.",
+  "<b>Opsi D</b>",
+  "<br><img src='./opsi-d1.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Ya, diagram panah tersebut merupakan pemetaan.</b>",
+  "● Setiap elemen pada himpunan di sebelah kiri (daerah asal) memiliki tepat satu panah yang keluar darinya, menuju himpunan di sebelah kanan.",
+  "● Tidak ada elemen di daerah asal yang tidak memiliki pasangan, dan tidak ada elemen di daerah asal yang memiliki lebih dari satu pasangan.",
+  "Oleh karena itu, diagram tersebut memenuhi syarat sebagai pemetaan."
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
+kategori: "Fungsi",
+pertanyaan: "Pasangan berurutan berikut yang bukan merupakan pemetaan atau fungsi dari A = {a, b, c, d} ke B = {0, 1, 2} adalah...",
+opsi: ["{(a,0),(b,0),(c,0),(d,0)}","{(a,0),(b,2),(c,1)}","{(a,1),(b,2),(c,0),(d,2)}","{(a,0),(b,1),(c,2),(d,0)}"],
 jawaban: 1,
 penyelesaian: [
-    ""
+  "📝<b>Analisis masing-masing opsi</b>:",
+  "<b>Opsi A</b>:",
+  "{(a,0),(b,0),(c,0),(d,0)} dapat digambarkan dengan <br><img src='./pemetaan-a.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Fungsi</b>",
+  "Ini memenuhi syarat fungsi, yaitu:",
+  "● punya pasangan ✅",
+  "● tidak punya lebih dari satu pasangan ✅",
+  "Jadi, relasi tersebut memenuhi definisi fungsi.",
+  "<b>Opsi B</b>:",
+  "{(a,0),(b,2),(c,1)} dapat digambarkan dengan <br><img src='./pemetaan-b.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Bukan fungsi</b>",
+  "Tidak memenuhi syarat fungsi:",
+  "● ada elemen di A (yaitu d) yang tidak dipetakan ke elemen di B, maka tidak memenuhi syarat fungsi.",
+  "Bukan fungsi, karena tidak semua anggota A memiliki pasangan",
+  "<b>Opsi C</b>:",
+  "{(a,1),(b,2),(c,0),(d,2)} dapat digambarkan dengan <br><img src='./pemetaan-c.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Fungsi</b>",
+  "Ini memenuhi syarat fungsi, yaitu:",
+  "● punya tepat satu pasangan ✅",
+  "● tidak ada yang punya lebih dari satu pasangan ✅",
+  "walaupun b dan d sama-sama ke 2, itu tetap boleh. Fungsi tidak masalah kalau beberapa elemen domain punya hasil yang sama",
+  "<b>Opsi D</b>:",
+  "{(a,0),(b,1),(c,2),(d,0)} dapat digambarkan dengan <br><img src='./pemetaan-d.png' alt='soal segitiga' width='260'> <br>",
+  "<b>Fungsi</b>",
+  "Ini memenuhi syarat fungsi, yaitu:",
+  "● punya tepat satu pasangan ✅",
+  "● tidak ada yang punya lebih dari satu pasangan ✅",
+  "walaupun a dan b sama-sama ke 0, itu tetap boleh. Fungsi tidak masalah kalau beberapa elemen domain punya hasil yang sama",
+  "Jadi, yang bukan merupakan fungsi adalah pilihan jawaban B."
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Fungsi",
+pertanyaan: "Ditentukan suatu fungsi f : x &#8594; x<sup>2</sup> - 2x Bayangan -3 oleh f adalah....",
+opsi: ["15","-3","3","10"],
+jawaban: 0,
 penyelesaian: [
-    ""
+  "📝<b>KONSEP</b> : Notasi fungsi umumnya ditulis dalam bentuk <b><i>f: x &#8594; y</i></b> atau <b><i>f: x &#8594; f(x)</i></b> menjadi <b><i> f(x) = y</i></b>, dibaca 'fungsi <b><i>f</i></b> memetakan <b><i>x</i></b> ke <b><i>y</i></b>'. <b><i>f(x)</i></b> merupakan hasil peta bayangan dari <b><i>x</i></b>.",
+  "📌Diketahui:",
+  "Fungsi : f : x &#8594; x<sup>2</sup> - 2x ",
+  "Ditanya : Bayangan -3 oleh fungsi tersebut",
+  "💡 Bayangan suatu nilai 𝑥 adalah hasil substitusi ke fungsi, yaitu:",
+  "<b><i>f(x)</i></b>",
+  "✏️ Masukkan 𝑥= − 3 ke fungsi:",
+  "<b><i>f(-3) = (-3)<sup>2</sup> - 2(-3)</i></b>",
+  "<b><i>f(-3) = 9 - (-6)</i></b>",
+  "<b><i>f(-3) = 9 + 6 = 15</i></b>",
+  "Bayangan -3 adalah 15"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Fungsi",
+pertanyaan: "Diketahui <i>f(x) = ax + b </i>, jika <i>f(2) = 5</i> dan <i>f(-1) = -4</i> maka fungsi f adalah....",
+opsi: ["<i>3x - 1</i>","<i>-3x - 1</i>","<i>2x + 1</i>","<i>5x - 3</i>"],
+jawaban: 0,
 penyelesaian: [
-    ""
+  "📌 Konsep",
+  "Fungsi yang diberikan: 𝑓(𝑥) = 𝑎𝑥 + 𝑏",
+  "📖 Definisi yang dipakai",
+  "● 𝑓(2) = 5 &#8594; f(2)=5 → artinya saat 𝑥 = 2, hasilnya 5",
+  "● 𝑓(−1)= − 4 &#8594; artinya saat 𝑥 = −1, hasilnya -4",
+  "berarti kita punya dua persamaan:",
+  "● a𝑥 + b = 𝑎(2) + 𝑏 = 2𝑎 + 𝑏 = 5 .....<i>persamaan (1)</i>",
+  "● a𝑥 + b = 𝑎(−1) + 𝑏 = -𝑎 + 𝑏 = -4 .....<i>persamaan (2)</i>",
+  "✏️ Selesaikan sistem persamaan :",
+  "Kurangkan Persamaan (1) dan persamaan (2):",
+  " (2𝑎 + 𝑏) - (-𝑎 + 𝑏) = 5 - (-4)",
+  "2𝑎 + 𝑏 + 𝑎 - 𝑏 = 5 + 4",
+  "2𝑎 + 𝑎 + 𝑏  - 𝑏 = 9",
+  "3𝑎 - 0 = 9",
+  "3𝑎 = 9 &#8594; 𝑎 = 9 &frasl; 3",
+  "&#8594; 𝑎 = 3",
+  "Substitusi nilai 𝑎 = 3 ke salah satu persamaan:",
+  "2𝑎 + 𝑏 = 5",
+  "2(3) + 𝑏 = 5",
+  "6 + 𝑏 = 5",
+  "𝑏 = 5 - 6 = -1",
+  "Jadi nilai 𝑎 = 3 dan 𝑏 = -1",
+  "Masukkan nilai 𝑎 dan 𝑏 ke dalam fungsi <i>f</i> :",
+  "𝑎𝑥 + 𝑏 = 3x - 1",
+  "Jadi Fungsi <i>f(x)</i> adalah <i>f(x) = 3x - 1</i>."
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Fungsi",
+pertanyaan: "Jika A adalah Himpunan siswa di suatu sekolah dan B adalah Himpunan tanggal lahirnya, maka relasi dari himpunan A ke himpunan B adalah....",
+opsi: ["fungsi", "bukan fungsi", "fungsi & bukan perkawanan satu-satu", "perkawanan satu-satu"],
+jawaban: 2,
 penyelesaian: [
-    ""
+  "📌 Konsep",
+  "Relasi dari A (siswa) ke B (tanggal lahir):",
+  "setiap siswa punya tepat satu tanggal lahir",
+  "📖 Analisis berdasarkan definisi",
+  "✅ Apakah ini fungsi?",
+  "Syarat fungsi:",
+  "● setiap elemen A punya tepat satu pasangan di B : Setiap siswa hanya punya satu tanggal lahir",
+  "❌ Apakah perkawanan satu-satu?",
+  "Syarat satu-satu (korespondensi satu-satu):",
+  "● setiap siswa punya tanggal lahir berbeda",
+  "● tidak boleh ada dua siswa dengan tanggal lahir sama",
+  "❌ Kenyataannya : bisa saja beberapa siswa lahir di tanggal yang sama",
+  "➡️ Jadi bukan perkawanan satu-satu",
+  "Jadi, relasi tersebut menggambarkan Fungsi & bukan perkawanan satu-satu"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Pemetaan",
+pertanyaan: "Banyaknya pemetaan yang mungkin dari himpunan A = {b, 0} ke himpunan A sendiri adalah...",
+opsi: ["4","2","8","6"],
+jawaban: 0,
 penyelesaian: [
-    ""
+  "📖 <b>Konsep</b>: Jika Banyak anggota A = 𝑛, Maka banyak fungsi dari A ke A adalah: n<sup>n</sup>. Karena setiap elemen domain bebas memilih pasangan di kodomain",
+  "✏️ Himpunan A = {b, 0}",
+  "Jumlah anggota : n = 2",
+  "Maka 2<sup>2</sup> = 4",
+  "Banyak pemetaan dari A ke A sendiri adalah 4"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Korespondensi satu-satu",
+pertanyaan: "Berikut ini yg merupakan korespondensi satu-satu adalah....",
+opsi: ["{(a,1),(b,1),(c,1)}","{(a,b),(c,d),(b,d)}","{(1,b),(2,c),(3,b)}","{(1,a),(2,c),(3,d)}"],
+jawaban: 3,
 penyelesaian: [
-    ""
+  "📝<b>Konsep</b>:",
+  "Korespondensi satu-satu adalah:",
+  "● setiap elemen di A berpasangan dengan tepat satu elemen di B (tidak boleh ada pasangan ganda di domain)",
+  "● dan setiap elemen di B juga berpasangan dengan tepat satu elemen di A (tidak boleh ada hasil yang sama)",
+  "🔍<b>Cek satu per satu</b>:",
+  "<b>Opsi A {(a,1),(b,1),(c,1)}</b> : ❌ Banyak elemen ke 1 yang sama → tidak satu-satu",
+  "<b>Opsi B {(a,b),(c,d),(b,d)}</b> : ❌ d muncul dua kali → tidak satu-satu",
+  "<b>Opsi C {(1,b),(2,c),(3,b)}</b> : ❌ b muncul dua kali → tidak satu-satu",
+  "<b>Opsi D {(1,a),(2,c),(3,d)}</b> : ",
+  "✔️ Semua domain beda",
+  "✔️ Semua hasil beda",
+  "✅ Ini korespondensi satu-satu"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Fungsi",
+pertanyaan: "Perhatikan diagram panah berikut. <br><img src='./pemetaan-ab.png' alt='soal segitiga' width='260'> <br> Rumus fungsi dari A ke B adalah...",
+opsi: ["<i>f(x) = 3x - 2</i>","<i>f(x) = 5x + 3</i>","<i>f(x) = 2x + 3</i>","<i>f(x) = 2x - 3</i>"],
+jawaban: 2,
 penyelesaian: [
-    ""
+  "📝 Untuk menentukan rumus fungsi dari himpunan A ke himpunan B, kita bisa menggunakan bentuk umum fungsi linear:",
+  "<i> f(x) = ax + b</i>",
+  "Berdasarkan diagram panah, kita memiliki pasangan-pasangan berikut:",
+  "● <i>x = 5 &#8594; f(x) = 13 &#8594; f(5)= 13 </i> → artinya saat 𝑥 = 5, hasilnya 13 &#8594; 5a + b = 13 <i>...Persamaan (1)</i> ",
+  "● <i>x = 6 &#8594; f(x) = 15 &#8594; f(6)= 15 </i> → artinya saat 𝑥 = 6, hasilnya 15 &#8594; 6a + b = 15 <i>...Persamaan (2)</i> ",
+  "● <i>x = 8 &#8594; f(x) = 19 &#8594; f(8)= 19 </i> → artinya saat 𝑥 = 8, hasilnya 19 &#8594; 8a + b = 19 <i>...Persamaan (3)</i> ",
+  "✏️ Mencari nilai a",
+  "Kita punya 3 persamaan:",
+  "● 5a + b = 13 <i>...Persamaan (1)</i>",
+  "● 6a + b = 15 <i>...Persamaan (2)</i>",
+  "● 8a + b = 19 <i>...Persamaan (3)</i>",
+  "Kurangkan persamaan (2) dengan persamaan (1) : <i>(1) - (2)</i>",
+  "(5a + b) - (6a + b) = 13 - 15",
+  "-a - 0 = -2",
+  "a = 2",
+  "Substitusi nilai a ke salah satu persamaan:",
+  "8a + b = 19 &#8594; 8(2) + b = 19",
+  "16 + b = 19",
+  "b = 19 - 16 = 3",
+  "Jadi nilai a = 2 dan b = 3",
+  "Masukkan nilai a = 2 dan b = 3 ke dalam persamaan fungsi <i>f(x) = ax + b</i>",
+  "<i>f(x) = 2x + 3</i>"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
-jawaban: 1,
+kategori: "Fungsi",
+pertanyaan: "Diketahui fungsi <i>f(x) = 4x<sup>2</sup> - 3x + 2</i>. Nilai dari <i>f(2a + 3)</i> adalah...",
+opsi: ["<i>16a<sup>2</sup> + 42a + 29</i>","<i>16a<sup>2</sup> + 24a + 29</i>","<i>8a<sup>2</sup> + 42a + 29</i>","<i>16a<sup>2</sup> + 42a - 29</i>"],
+jawaban: 0,
 penyelesaian: [
-    ""
+  "📌 Diketahui:",
+  "<i> f(x) = 4x<sup>2</sup> - 3x + 2</i>",
+  "📌 Ditanya <i>f(2a + 3)</i>",
+  "✏️ Ganti 𝑥 dengan <i>(2a + 3)</i>:",
+  "<i>f(2a + 3) = 4(2a + 3)<sup>2</sup> - 3(2a + 3) + 2</i>",
+  "<i> = 4(4a<sup>2</sup> + 12a + 9) - 6a - 9 + 2</i>",
+  "<i> = 16a<sup>2</sup> + 48a + 36 - 6a - 9 + 2</i>",
+  "<i> = 16a<sup>2</sup> + 48a - 6a + 36 - 9 + 2</i>",
+  "<i> = 16a<sup>2</sup> + 42a + 29</i>"
 ]
 },
 {
-kategori: "",
-pertanyaan: "",
-opsi: ["","","",""],
+kategori: "Pemetaan",
+pertanyaan: "Diketahui himpunan A = {a, b, c} dan himpunan B = {0, 1, 2, 3}. Berapa banyak pemetaan himpunan A ke himpunan B",
+opsi: ["12","64","21","24"],
 jawaban: 1,
 penyelesaian: [
-    ""
+  "📌 <b>Konsep</b>: Setiap anggota A bisa dipetakan ke salah satu anggota B.",
+  "📌 Banyak anggota:",
+  "● Himpunan A memiliki 3 anggota",
+  "● Himpunan B memiliki 4 anggota",
+  "Pemetaan yang mungkin:",
+  "● a punya 4 pilihan",
+  "● b punya 4 pilihan",
+  "● c punya 4 pilihan",
+  "📌 Maka total pemetaan:",
+  "<i> 4 × 4 × 4 = 4<sup>3</sup> = 64</i>",
+  "Jumlah fungsi dari A ke B: <i>n(B)<sup>n(A)</sup> = 4<sup>3</sup> = 64</i>"
 ]
 }
 ]
